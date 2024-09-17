@@ -1,0 +1,27 @@
+*,*::after,*::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+body{
+    background: rgb(211, 255, 255);
+    display: flex;
+    justify-content: center;
+}
+#form{
+    background: #ffffff;
+    padding: 2rem;
+    margin: 2rem 1rem;
+    border-radius: 5px;
+    width: 100%;
+    display: grid;
+    gap: 1rem;
+}
+h1{
+    justify-self: center;
+    margin-bottom: 2rem;
+}
+/* select{
+    width: 100%;
+} */

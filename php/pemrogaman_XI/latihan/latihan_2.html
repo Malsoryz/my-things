@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan 2</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+        }
+        .header{
+            background-color: #f1f1f1;
+            height: 3rem;
+            width: 100vw;
+        }
+        .row{
+            height: calc(100vh - 3rem);
+            width: 100vw;
+            --lebar-sidebar: 250px;
+        }
+        .row .column{
+            float: inline-start;
+            height: 100%;
+        }
+        .row .kiri{
+            width: var(--lebar-sidebar);
+            background-color: aqua;
+            padding: 1rem 0rem 1rem 1rem;
+        }
+        .row .kanan{
+            width: calc(100% - var(--lebar-sidebar));
+            background-color: #1869ff;
+            padding: 1rem 2rem;
+        }
+        .row .kiri h3{
+            margin: 0;
+        }
+        .row .kanan h1{
+            margin: 0;
+        }
+        .row .kiri ul{
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+        .row .kiri ul li{
+            position: relative;
+        }
+        .row .kiri ul li a{
+            display: block;
+            color: black;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 16px 0 0 16px;
+        }
+        .row .kiri ul li a.selected{ 
+            background-color: #1869ff;
+        }
+        .row .kiri ul li a.selected::before{
+            content: '';
+            height: 0.5rem;
+            width: 0.5rem;
+            background-color: transparent;
+            position: absolute;
+            right: -5px;
+            top: -0.5rem;
+            border-radius: 0 0 100% 0;
+            border-right: 5px solid #1869ff;
+            border-bottom: 5px solid #1869ff;
+        }
+        .row .kiri ul li a.selected::after{
+            content: '';
+            height: 0.5rem;
+            width: 0.5rem;
+            background-color: transparent;
+            position: absolute;
+            right: -5px;
+            bottom: -0.5rem;
+            border-radius: 0 100% 0 0;
+            border-right: 5px solid #1869ff;
+            border-top: 5px solid #1869ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header"><header>NIGGA</header></div>
+    <div class="row">
+        <div class="column kiri">
+            <h3>Jurusan Lainnya</h3>
+            <ul>
+                <li><a href="#" class="selected">Rekayasa Perangkat Lunak</a></li>
+                <li><a href="#">Kuliner</a></li>
+                <li><a href="#">Usaha Layanan Wisata</a></li>
+                <li><a href="#">Tata Busana</a></li>
+                <li><a href="#">Kecantikan</a></li>
+            </ul>
+        </div>
+        <div class="column kanan">
+            <h1>Rekayasa Perangkat Lunak</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum doloribus debitis nostrum! Aliquid, cupiditate pariatur aperiam quos architecto vero saepe adipisci eos, impedit asperiores dolorum! Repellat, alias. Aut distinctio vero minima! Vel saepe id beatae sit, suscipit aliquid eveniet in! Id, rem perspiciatis? Error temporibus incidunt non consequatur nemo quam, sit deleniti placeat eveniet, ducimus nostrum aut vitae repellat, quo hic. Quae necessitatibus laudantium odit reiciendis tempore adipisci, quibusdam delectus impedit in excepturi minus harum deserunt quam hic repellat doloremque suscipit, quos et? Vel hic tempora autem cum? Vitae dolore incidunt ipsam maxime odit molestias vero at labore architecto ipsa placeat magnam corrupti cumque aut ratione, nemo neque voluptatum hic! Enim ipsa adipisci veniam quisquam excepturi cum id ducimus pariatur voluptates architecto tempora, molestias, eveniet sint, ex animi ipsum? Eum quasi est at adipisci molestiae temporibus explicabo dicta totam, nemo fuga minima, iure modi quaerat maiores qui itaque eius, reprehenderit tenetur quo optio. Aliquam fugiat quia distinctio, cum veniam in eum delectus voluptate corrupti nesciunt, explicabo esse quos! Dolore quas aperiam omnis provident, perferendis ea cum magnam? Animi asperiores praesentium tempora laudantium dolorum fugiat, totam hic repellendus ea. Veniam vel iure, eos soluta enim ut. Neque aspernatur sapiente ut repellendus.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+*,*::after,*::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    background-image: url(https://img.freepik.com/free-photo/night-sky-glows-with-aurora-snowy-mountains-generative-ai_188544-12454.jpg?t=st=1714445991~exp=1714449591~hmac=bbf3f5819b91a92d070da99cb530e6848227c0f314d4b35700c71a7a44306d34&w=740);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+}
+form{
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    width: min(80%, 600px);
+    margin: 2rem 1rem;
+    padding: 2rem;
+    display: grid;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+    height: 325px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+form>h2{
+    justify-self: center;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+.text-area{
+    color: white;
+}
+.text-area>input{
+    width: 100%;
+    padding: 0.25rem;
+    border-radius: 5px;
+}
+.button{
+    padding: 0.25rem;
+    border-radius: 5px;
+    background: rgb(64, 64, 255);
+    color: white;
+    margin-top: 2rem;
+}
