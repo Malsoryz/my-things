@@ -1,0 +1,111 @@
+unit ubahnumtotext;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  Tflatihan10 = class(TForm)
+    Label1: TLabel;
+    iangka: TEdit;
+    Label2: TLabel;
+    output: TMemo;
+    oangka1: TEdit;
+    oangka2: TEdit;
+    oangka3: TEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure iangkaChange(Sender: TObject);
+  private
+  R,P,S: integer;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  flatihan10: Tflatihan10;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tflatihan10.FormCreate(Sender: TObject);
+begin
+  output.Text := '';
+end;
+
+procedure Tflatihan10.iangkaChange(Sender: TObject);
+begin
+  R := strtoint(iangka.Text) Div 100;
+  oangka1.Text := inttostr(R);
+  P := (strtoint(iangka.Text) Mod 100) Div 10;
+  oangka2.Text := inttostr(P);
+  S := (strtoint(iangka.Text) Div 100) Mod 10) Div 1;
+  oangka3.Text := inttostr(S);
+
+  output.Text := '';
+
+  case R of
+    1: output.Text := 'Seratus';
+    2: output.Text := 'Dua ratus';
+    3: output.Text := 'Tiga ratus';
+    4: output.Text := 'Empat ratus';
+    5: output.Text := 'Lima ratus';
+    6: output.Text := 'Enam ratus';
+    7: output.Text := 'Tujuh ratus';
+    8: output.Text := 'Delapan ratus';
+    9: output.Text := 'Sembilan ratus';
+  end;
+  case P of
+    2: output.Text := output.Text + #32 + 'Dua puluh';
+    3: output.Text := output.Text + #32 + 'Tiga puluh';
+    4: output.Text := output.Text + #32 + 'Empat puluh';
+    5: output.Text := output.Text + #32 + 'Lima puluh';
+    6: output.Text := output.Text + #32 + 'Enam puluh';
+    7: output.Text := output.Text + #32 + 'Tujuh puluh';
+    8: output.Text := output.Text + #32 + 'Delapan puluh';
+    9: output.Text := output.Text + #32 + 'Sembilan puluh';
+    1: case S of
+       0: output.Text := output.Text + #32 + 'Sepuluh';
+       1: output.Text := output.Text + #32 + 'Sebelas';
+       2: output.Text := output.Text + #32 + 'Dua Belas';
+       3: output.Text := output.Text + #32 + 'Tiga Belas';
+       4: output.Text := output.Text + #32 + 'Empat Belas';
+       5: output.Text := output.Text + #32 + 'Lima Belas';
+       6: output.Text := output.Text + #32 + 'Enam Belas';
+       7: output.Text := output.Text + #32 + 'Tujuh Belas';
+       8: output.Text := output.Text + #32 + 'Delapan Belas';
+       9: output.Text := output.Text + #32 + 'Sembilan Belas';
+       end;
+  end;
+  case P of
+    0: case S of
+       1: output.Text := output.Text + #32 + 'Satu';
+       2: output.Text := output.Text + #32 + 'Dua';
+       3: output.Text := output.Text + #32 + 'Tiga';
+       4: output.Text := output.Text + #32 + 'Empat';
+       5: output.Text := output.Text + #32 + 'Lima';
+       6: output.Text := output.Text + #32 + 'Enam';
+       7: output.Text := output.Text + #32 + 'Tujuh';
+       8: output.Text := output.Text + #32 + 'Delapan';
+       9: output.Text := output.Text + #32 + 'Sembilan';
+       end;
+  end;
+  case P of
+    2..9: case S of
+       1: output.Text := output.Text + #32 + 'Satu';
+       2: output.Text := output.Text + #32 + 'Dua';
+       3: output.Text := output.Text + #32 + 'Tiga';
+       4: output.Text := output.Text + #32 + 'Empat';
+       5: output.Text := output.Text + #32 + 'Lima';
+       6: output.Text := output.Text + #32 + 'Enam';
+       7: output.Text := output.Text + #32 + 'Tujuh';
+       8: output.Text := output.Text + #32 + 'Delapan';
+       9: output.Text := output.Text + #32 + 'Sembilan';
+       end;
+  end;
+end;
+
+end.

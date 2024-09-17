@@ -1,0 +1,33 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons;
+
+type
+  Tlatihan9 = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    zodiacdate: TDateTimePicker;
+    tzodiac: TEdit;
+    thlahir: TEdit;
+    SpeedButton1: TSpeedButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  latihan9: Tlatihan9;
+
+implementation
+
+{$R *.dfm}
+
+end.

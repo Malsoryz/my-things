@@ -1,0 +1,80 @@
+unit diskon;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    departlabel: TLabel;
+    jkelamin: TLabel;
+    jkpria: TRadioButton;
+    jkwanita: TRadioButton;
+    ukuranlabel: TLabel;
+    cbbukuran: TComboBox;
+    labelpelanggan: TLabel;
+    chbpelanggan: TCheckBox;
+    labelharga: TLabel;
+    labeldiskon: TLabel;
+    labeltotal: TLabel;
+    tdharga: TEdit;
+    tddiskon: TEdit;
+    tdtotal: TEdit;
+    btnhitung: TButton;
+    btnreset: TButton;
+    btnclose: TButton;
+    procedure btnhitungClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btnhitungClick(Sender: TObject);
+var tharga, tdiskon, ttotal:real;
+begin
+  //pria
+  if jkpria.checked then
+    begin
+      if cbbukuran.ItemIndex = 0 then
+      tharga := 50000
+      else if cbbukuran.ItemIndex = 1 then
+      tharga := 55000
+      else if cbbukuran.ItemIndex = 2 then
+      tharga := 60000;
+    end;
+
+  //wanita
+  if jkwanita.Checked then
+    begin
+      if cbbukuran.ItemIndex = 0 then
+      tharga := 45000
+      else if cbbukuran.ItemIndex = 1 then
+      tharga := 50000
+      else if cbbukuran.ItemIndex = 2 then
+      tharga := 55000;
+    end;
+
+  //jika pelanggan
+  if chbpelanggan.Checked then
+    tdiskon := tharga / 10
+  else tdiskon := tharga;
+
+  //hasil atau total
+  tdharga.Text := FloatToStr(tharga);
+  tddiskon.Text := FloatToStr(tdiskon);
+  tdtotal := tharga - tdiskon;
+  tdtotal.Text := FloatToStr(tdtotal);
+
+end;
+
+end.

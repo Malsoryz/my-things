@@ -1,0 +1,104 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Samples.Spin;
+
+type
+  Tlatihan6 = class(TForm)
+    judullabel: TLabel;
+    labelnama: TLabel;
+    labelderpart: TLabel;
+    labelgolong: TLabel;
+    labelkelamin: TLabel;
+    labelstats: TLabel;
+    labeljanak: TLabel;
+    labelgajip: TLabel;
+    labeltistri: TLabel;
+    labeltanak: TLabel;
+    labeltgaji: TLabel;
+    //input
+    teditnama: TEdit;
+    cbbdepartment: TComboBox;
+    listgolong: TListBox;
+    rjkpria: TRadioButton;
+    rjkwanita: TRadioButton;
+    cbstatus: TCheckBox;
+    spinvalueanak: TSpinEdit;
+    teditgajipokok: TEdit;
+    tedittistri: TEdit;
+    tedittanak: TEdit;
+    tedittgaji: TEdit;
+    bhitung: TButton;
+    breset: TButton;
+    bclose: TButton;
+    procedure bhitungClick(Sender: TObject);
+    procedure bresetClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  latihan6: Tlatihan6;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tlatihan6.bhitungClick(Sender: TObject);
+const gaji:Array[0..2,0..3] of Real = (
+  (750000, 1000000, 1250000, 1500000),
+  (1000000, 1250000, 1500000, 1750000),
+  (1250000, 1500000, 1750000, 2000000)
+);
+var gajipokok, tunjanganistri, tunjangananak, jumlahanak:real;
+begin
+  gajipokok := gaji[cbbdepartment.ItemIndex, listgolong.ItemIndex];
+  tunjanganistri := 0;
+  tunjangananak := 0;
+  jumlahanak := spinvalueanak.Value;
+
+  //tunjangan menikah
+  if cbstatus.Checked and rjkpria.Checked then
+    begin
+      tunjanganistri := gajipokok*10/100;
+      if jumlahanak > 2 then
+        begin
+          jumlahanak := 2;
+        end;
+
+      tunjangananak := (gajipokok*jumlahanak)*5/100;
+    end;
+
+  if not (cbstatus.Checked and rjkpria.Checked) then
+    begin
+      teditgajipokok.Text := '';
+      tedittistri.Text := '';
+    end;
+
+  teditgajipokok.Text := FloatToStr(gajipokok);
+  tedittistri.Text := FloatToStr(tunjanganistri);
+  tedittanak.Text := FloatToStr(tunjangananak);
+  tedittgaji.Text := FloatToStr(gajipokok+tunjanganistri+tunjangananak);
+end;
+
+procedure Tlatihan6.bresetClick(Sender: TObject);
+begin
+  teditnama.Text := '';
+  cbbdepartment.Text := '';
+  spinvalueanak.Value := 0;
+  rjkpria.Checked := false;
+  rjkwanita.Checked := false;
+  cbstatus.Checked := false;
+
+  teditgajipokok.Text := '';
+  tedittistri.Text := '';
+  tedittanak.Text := '';
+  tedittgaji.Text := '';
+end;
+
+end.

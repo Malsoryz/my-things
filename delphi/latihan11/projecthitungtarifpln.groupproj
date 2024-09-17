@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{478BDBBB-E037-42C0-91B3-2AFB6CA4726A}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="tarifpln.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\latihan9\latihan9ikmal.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="F:\aspihan\Listrik.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="tarifpln">
+        <MSBuild Projects="tarifpln.dproj"/>
+    </Target>
+    <Target Name="tarifpln:Clean">
+        <MSBuild Projects="tarifpln.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tarifpln:Make">
+        <MSBuild Projects="tarifpln.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="latihan9ikmal">
+        <MSBuild Projects="..\latihan9\latihan9ikmal.dproj"/>
+    </Target>
+    <Target Name="latihan9ikmal:Clean">
+        <MSBuild Projects="..\latihan9\latihan9ikmal.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="latihan9ikmal:Make">
+        <MSBuild Projects="..\latihan9\latihan9ikmal.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Listrik">
+        <MSBuild Projects="F:\aspihan\Listrik.dproj"/>
+    </Target>
+    <Target Name="Listrik:Clean">
+        <MSBuild Projects="F:\aspihan\Listrik.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Listrik:Make">
+        <MSBuild Projects="F:\aspihan\Listrik.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="tarifpln;latihan9ikmal;Listrik"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="tarifpln:Clean;latihan9ikmal:Clean;Listrik:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="tarifpln:Make;latihan9ikmal:Make;Listrik:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

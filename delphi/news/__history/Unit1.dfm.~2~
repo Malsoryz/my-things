@@ -1,0 +1,225 @@
+object latihan6: Tlatihan6
+  Left = 0
+  Top = 0
+  Caption = 'Latihan6'
+  ClientHeight = 447
+  ClientWidth = 428
+  Color = 16580548
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object judullabel: TLabel
+    Left = 88
+    Top = 16
+    Width = 237
+    Height = 22
+    Alignment = taCenter
+    Caption = 'PERHITUNGAN GAJI KARYAWAN'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Trebuchet MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object labelnama: TLabel
+    Left = 24
+    Top = 75
+    Width = 27
+    Height = 13
+    Caption = 'Nama'
+  end
+  object labelderpart: TLabel
+    Left = 24
+    Top = 102
+    Width = 57
+    Height = 13
+    Caption = 'Department'
+  end
+  object labelgolong: TLabel
+    Left = 24
+    Top = 126
+    Width = 45
+    Height = 13
+    Caption = 'Golongan'
+  end
+  object labelkelamin: TLabel
+    Left = 24
+    Top = 198
+    Width = 62
+    Height = 13
+    Caption = 'Jenis kelamin'
+  end
+  object labelstats: TLabel
+    Left = 24
+    Top = 221
+    Width = 31
+    Height = 13
+    Caption = 'Status'
+  end
+  object labeljanak: TLabel
+    Left = 24
+    Top = 246
+    Width = 60
+    Height = 13
+    Caption = 'Jumlah Anak'
+  end
+  object labelgajip: TLabel
+    Left = 24
+    Top = 291
+    Width = 49
+    Height = 13
+    Caption = 'Gaji Pokok'
+  end
+  object labeltistri: TLabel
+    Left = 24
+    Top = 318
+    Width = 73
+    Height = 13
+    Caption = 'Tunjangan Istri'
+  end
+  object labeltanak: TLabel
+    Left = 24
+    Top = 344
+    Width = 78
+    Height = 13
+    Caption = 'Tunjangan Anak'
+  end
+  object labeltgaji: TLabel
+    Left = 24
+    Top = 371
+    Width = 45
+    Height = 13
+    Caption = 'Total Gaji'
+  end
+  object teditnama: TEdit
+    Left = 152
+    Top = 72
+    Width = 255
+    Height = 21
+    TabOrder = 0
+  end
+  object cbbdepartment: TComboBox
+    Left = 152
+    Top = 99
+    Width = 255
+    Height = 21
+    Style = csDropDownList
+    TabOrder = 1
+    Items.Strings = (
+      'Administrasi'
+      'Keuangan'
+      'Marketing')
+  end
+  object listgolong: TListBox
+    Left = 152
+    Top = 126
+    Width = 255
+    Height = 61
+    ItemHeight = 13
+    Items.Strings = (
+      'I'
+      'II'
+      'III'
+      'IV')
+    TabOrder = 2
+  end
+  object rjkpria: TRadioButton
+    Left = 152
+    Top = 197
+    Width = 113
+    Height = 17
+    Caption = 'Pria'
+    TabOrder = 3
+  end
+  object rjkwanita: TRadioButton
+    Left = 280
+    Top = 197
+    Width = 113
+    Height = 17
+    Caption = 'Wanita'
+    TabOrder = 4
+  end
+  object cbstatus: TCheckBox
+    Left = 152
+    Top = 220
+    Width = 97
+    Height = 17
+    Caption = 'Menikah'
+    TabOrder = 5
+  end
+  object spinvalueanak: TSpinEdit
+    Left = 152
+    Top = 243
+    Width = 255
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 6
+    Value = 0
+  end
+  object teditgajipokok: TEdit
+    Left = 152
+    Top = 288
+    Width = 255
+    Height = 21
+    TabOrder = 7
+    Text = '0'
+  end
+  object tedittistri: TEdit
+    Left = 152
+    Top = 315
+    Width = 255
+    Height = 21
+    TabOrder = 8
+    Text = '0'
+  end
+  object tedittanak: TEdit
+    Left = 152
+    Top = 342
+    Width = 255
+    Height = 21
+    TabOrder = 9
+    Text = '0'
+  end
+  object tedittgaji: TEdit
+    Left = 152
+    Top = 368
+    Width = 255
+    Height = 21
+    TabOrder = 10
+    Text = '0'
+  end
+  object bhitung: TButton
+    Left = 152
+    Top = 408
+    Width = 81
+    Height = 25
+    Caption = 'Hitung'
+    TabOrder = 11
+    OnClick = bhitungClick
+  end
+  object breset: TButton
+    Left = 239
+    Top = 408
+    Width = 81
+    Height = 25
+    Caption = 'Reset'
+    TabOrder = 12
+    OnClick = bresetClick
+  end
+  object bclose: TButton
+    Left = 326
+    Top = 408
+    Width = 81
+    Height = 25
+    Caption = 'Close'
+    TabOrder = 13
+  end
+end

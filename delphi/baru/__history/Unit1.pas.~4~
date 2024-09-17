@@ -1,0 +1,44 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls;
+
+type
+  TFLatihan3 = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Label3: TLabel;
+    Edit2: TEdit;
+    DateTimePicker1: TDateTimePicker;
+    Label4: TLabel;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    Label5: TLabel;
+    ComboBox1: TComboBox;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Edit5: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Memo1: TMemo;
+    Memo2: TMemo;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FLatihan3: TFLatihan3;
+
+implementation
+
+{$R *.dfm}
+
+end.

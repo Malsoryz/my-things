@@ -1,0 +1,98 @@
+unit diskon;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  Tflatihan7 = class(TForm)
+    departlabel: TLabel;
+    jkelamin: TLabel;
+    jkpria: TRadioButton;
+    jkwanita: TRadioButton;
+    ukuranlabel: TLabel;
+    cbbukuran: TComboBox;
+    labelpelanggan: TLabel;
+    chbpelanggan: TCheckBox;
+    labelharga: TLabel;
+    labeldiskon: TLabel;
+    labeltotal: TLabel;
+    tdharga: TEdit;
+    tddiskon: TEdit;
+    tdtotal: TEdit;
+    btnhitung: TButton;
+    btnreset: TButton;
+    btnclose: TButton;
+    procedure btnhitungClick(Sender: TObject);
+    procedure btnresetClick(Sender: TObject);
+    procedure btncloseClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  flatihan7: Tflatihan7;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tflatihan7.btncloseClick(Sender: TObject);
+begin
+  application.Terminate;
+end;
+
+procedure Tflatihan7.btnhitungClick(Sender: TObject);
+var tharga, tdiskon, ttotal:real;
+begin
+  //pria
+  if jkpria.checked then
+    begin
+      if cbbukuran.ItemIndex = 0 then
+      tharga := 50000
+      else if cbbukuran.ItemIndex = 1 then
+      tharga := 55000
+      else if cbbukuran.ItemIndex = 2 then
+      tharga := 60000;
+    end;
+
+  //wanita
+  if jkwanita.Checked then
+    begin
+      if cbbukuran.ItemIndex = 0 then
+      tharga := 45000
+      else if cbbukuran.ItemIndex = 1 then
+      tharga := 50000
+      else if cbbukuran.ItemIndex = 2 then
+      tharga := 55000;
+    end;
+
+  //jika pelanggan atau diskon
+  if chbpelanggan.checked then
+    tdiskon := tharga / 10
+  else tdiskon := 0;
+
+  //hasil atau total
+  tdharga.Text := FloatToStr(tharga);
+  tddiskon.Text := FloatToStr(tdiskon);
+  ttotal := tharga - tdiskon;
+  tdtotal.Text := FloatToStr(ttotal);
+
+end;
+
+procedure Tflatihan7.btnresetClick(Sender: TObject);
+begin
+  jkpria.Checked := false;
+  jkwanita.Checked := false;
+  cbbukuran.ItemIndex := 0;
+  chbpelanggan.Checked := false;
+  tdharga.Text := '0';
+  tddiskon.Text := '0';
+  tdtotal.Text := '0';
+end;
+
+end.

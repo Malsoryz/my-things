@@ -1,0 +1,62 @@
+unit pln;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  Tflatihan11 = class(TForm)
+    Label1: TLabel;
+    golongtarif: TRadioGroup;
+    daya: TRadioGroup;
+    Label2: TLabel;
+    teditinput1: TEdit;
+    Label3: TLabel;
+    teditoutput1: TEdit;
+    teditoutput2: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    teditoutput3: TEdit;
+    teditoutput4: TEdit;
+    Label6: TLabel;
+    Label7: TLabel;
+    teditoutputhasil: TEdit;
+    btn1: TButton;
+    procedure golongtarifClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  flatihan11: Tflatihan11;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tflatihan11.golongtarifClick(Sender: TObject);
+begin
+daya.Items.Clear;
+case golongtarif.ItemIndex of
+  0: begin
+    daya.Items.Add('450');
+    daya.Items.Add('900');
+  end;
+  1: begin
+    daya.Items.Add('450');
+    daya.Items.Add('900');
+    daya.Items.Add('1300');
+  end;
+  2: begin
+    daya.Items.Add('450');
+    daya.Items.Add('900');
+    daya.Items.Add('1300');
+  end;
+end;
+end;
+
+end.

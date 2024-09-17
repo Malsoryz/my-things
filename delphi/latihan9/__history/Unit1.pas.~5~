@@ -1,0 +1,135 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons;
+
+type
+  TFlatihan9 = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    zodiacdate: TDateTimePicker;
+    tzodiac: TEdit;
+    thlahir: TEdit;
+    SpeedButton1: TSpeedButton;
+    ramalanmemo: TMemo;
+    procedure zodiacdateChange(Sender: TObject);
+    procedure zodiacdateUserInput(Sender: TObject; const UserString: string;
+      var DateAndTime: TDateTime; var AllowChange: Boolean);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Flatihan9: TFlatihan9;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFlatihan9.FormCreate(Sender: TObject);
+begin
+  SpeedButton1.Caption := 'Close';
+
+  SpeedButton1.NumGlyphs := 2;
+  SpeedButton1.Flat := True; 
+end;
+
+procedure TFlatihan9.zodiacdateChange(Sender: TObject);
+Const
+  hari:Array[1..7] of String = ('Minggu','Senin','Selasa','Rabu','Kamis','Jum''at','Sabtu');
+  zodiac:Array[1..12] of String = ('Aquarius','Pisces','Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagitarius','Capricorn');
+  ramalan:Array[1..12] of String = (
+  'Aquarius',
+  'Pisces',
+  'Aries',
+  'Taurus',
+  'Gemini',
+  'Cancer',
+  'Leo',
+  'Virgo',
+  'Libra',
+  'Scorpio',
+  'Sagitarius',
+  'Capricorn'
+  );
+var
+  yr,mn,dy:Word;
+  z:integer;
+
+begin
+  DecodeDate(zodiacdate.Date,yr,mn,dy);
+
+  case mn of
+  1 :case dy of
+    1..20:z:=12;
+    21..31:z:=1;
+    end;
+  2 :case dy of
+    1..19:z:=1;
+    20..29:z:=2;
+    end;
+  3 :case dy of
+    1..21:z:=2;
+    22..31:z:=3;
+    end;
+  4 :case dy of
+    1..20:z:=3;
+    21..30:z:=4;
+    end;
+  5 :case dy of
+    1..22:z:=4;
+    23..31:z:=5;
+    end;
+  6 :case dy of
+    1..23:z:=5;
+    24..30:z:=6;
+    end;
+  7 :case dy of
+    1..23:z:=6;
+    24..31:z:=7;
+    end;
+  8 :case dy of
+    1..23:z:=7;
+    24..31:z:=8;
+    end;
+  9 :case dy of
+    1..23:z:=8;
+    24..30:z:=9;
+    end;
+  10 :case dy of
+    1..23:z:=9;
+    24..31:z:=10;
+    end;
+  11 :case dy of
+    1..22:z:=10;
+    23..31:z:=11;
+    end;
+  12 :case dy of
+    1..21:z:=11;
+    22..31:z:=12;
+    end;
+    
+  end;
+
+  tzodiac.Text := hari[DayofWeek(zodiacdate.Date)];
+  thlahir.Text := zodiac[z];
+  ramalanmemo.Text := ramalan[z];
+end;
+
+procedure TFlatihan9.zodiacdateUserInput(Sender: TObject;
+  const UserString: string; var DateAndTime: TDateTime;
+  var AllowChange: Boolean);
+begin
+  AllowChange := True;
+end;
+
+end.

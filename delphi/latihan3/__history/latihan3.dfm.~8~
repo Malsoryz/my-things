@@ -1,0 +1,98 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Latihan3'
+  ClientHeight = 211
+  ClientWidth = 449
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object StaticText2: TStaticText
+    Left = 24
+    Top = 64
+    Width = 53
+    Height = 17
+    Caption = 'Bilangan 2'
+    TabOrder = 0
+  end
+  object Hasil: TStaticText
+    Left = 24
+    Top = 103
+    Width = 26
+    Height = 17
+    Caption = 'Hasil'
+    TabOrder = 1
+  end
+  object Bilangan1column: TEdit
+    Left = 112
+    Top = 21
+    Width = 185
+    Height = 21
+    TabOrder = 2
+  end
+  object StaticText1: TStaticText
+    Left = 24
+    Top = 25
+    Width = 53
+    Height = 17
+    Caption = 'Bilangan 1'
+    TabOrder = 3
+  end
+  object Hasilcolumn: TEdit
+    Left = 112
+    Top = 99
+    Width = 185
+    Height = 21
+    TabOrder = 4
+  end
+  object Bilangan2column: TEdit
+    Left = 112
+    Top = 60
+    Width = 185
+    Height = 21
+    TabOrder = 5
+  end
+  object kalibtn: TBitBtn
+    Left = 222
+    Top = 144
+    Width = 75
+    Height = 25
+    Caption = 'Kali'
+    TabOrder = 6
+    OnClick = kalibtnClick
+  end
+  object tambahbtn: TBitBtn
+    Left = 303
+    Top = 144
+    Width = 75
+    Height = 25
+    Caption = 'Tambah'
+    TabOrder = 7
+    OnClick = tambahbtnClick
+  end
+  object bagibtn: TBitBtn
+    Left = 222
+    Top = 175
+    Width = 75
+    Height = 25
+    Caption = 'Bagi'
+    TabOrder = 8
+    OnClick = bagibtnClick
+  end
+  object kurangbtn: TBitBtn
+    Left = 303
+    Top = 175
+    Width = 75
+    Height = 25
+    Caption = 'Kurang'
+    TabOrder = 9
+    OnClick = kurangbtnClick
+  end
+end

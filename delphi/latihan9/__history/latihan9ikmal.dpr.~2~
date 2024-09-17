@@ -1,0 +1,14 @@
+program latihan9ikmal;
+
+uses
+  Vcl.Forms,
+  Unit1 in 'Unit1.pas' {latihan9};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tlatihan9, latihan9);
+  Application.Run;
+end.
