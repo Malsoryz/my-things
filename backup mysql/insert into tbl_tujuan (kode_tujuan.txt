@@ -1,0 +1,43 @@
+insert into tbl_tujuan (kode_tujuan, tujuan, harga, jam) values
+('T001', 'Banjarbaru', '50000', '08:00'),
+('T002', 'Martapura', '85000', '09:30'),
+('T003', 'Pelaihari', '75000', '11:00'),
+('T004', 'Marabahan', '65000', '13:30');
+insert into supir (kode_supir, nama, jk, alamat, telp, umur) values
+('S001', 'Muhammad Daffa', 'Laki-laki', 'Jl. A. Yani No. 123', '08123456789', '30'),
+('S002', 'Siti Aminah', 'Perempuan', 'Jl. Veteran No. 45', '08219876543', '39'),
+('S003', 'Muhammad Abdurahman', 'Laki-laki', 'Jl. Sutoyo S. No. 67', '08315678901', '33'),
+('S004', 'Dewi Lestari', 'Perempuan', 'Jl. Hasan Basri No. 89', '08527891234', '33');
+insert into armada (plat, jenis, warna, jlh_kursi, kode_supir) values
+('DA1234ADZ', 'Sedan', 'Hitam', '4', 'S001'),
+('DA1678ZFD', 'SUV', 'Putih', '4', 'S002'),
+('DA1978TAI', 'Sedan', 'Merah', '4', 'S003'),
+('DA1456TAK', 'SUV', 'Abu', '4', 'S004');
+insert into tbl_kursi (kode_kursi, no_kursi, plat) values
+('01', '11', 'DA1234ADZ'),
+('02', '12', 'DA1234ADZ'),
+('03', '13', 'DA1234ADZ'),
+('04', '14', 'DA1234ADZ'),
+('05', '21', 'DA1678ZFD'),
+('06', '22', 'DA1678ZFD'),
+('07', '23', 'DA1678ZFD'),
+('08', '24', 'DA1678ZFD'),
+('09', '31', 'DA1978TAI'),
+('10', '32', 'DA1978TAI'),
+('11', '33', 'DA1978TAI'),
+('12', '34', 'DA1978TAI'),
+('13', '41', 'DA1456TAK'),
+('14', '42', 'DA1456TAK'),
+('15', '43', 'DA1456TAK'),
+('16', '44', 'DA1456TAK');
+insert into penumpang (kode_penumpang, nama, alamat, jk, umur, telp, kode_tujuan, kode_kursi, plat, tanggal) values
+('P001', 'Agus Salim', 'Jl. Pangeran Antasari No. 45', 'Laki-laki', '30', '08761234567', 'T001', '01', 'DA1234ADZ', '2024-09-23'),
+('P002', 'Rina Hartati', 'Jl. Sultan Adam No. 12', 'Perempuan', '25', '08129876543', 'T004', '05', 'DA1678ZFD', '2024-09-27'),
+('P003', 'Joko Prasetyo', 'Jl. A. Yani Km 6', 'Laki-laki', '40', '08237654321', 'T003', '09', 'DA1978TAI', '2024-10-11'),
+('P004', 'Diana Kusuma', 'Jl. Hasan Basry No. 78', 'Perempuan', '28', '08578901234', 'T002', '13', 'DA1456TAK', '2024-10-17'); 
+
+select * from tbl_tujuan;
+select * from supir;
+select * from armada;
+select * from tbl_kursi;
+select * from penumpang;

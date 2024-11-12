@@ -1,0 +1,44 @@
+create table tbl_tujuan(
+kode_tujuan varchar(11),
+tujuan text,
+harga varchar(11),
+jam varchar(17),
+primary key(kode_tujuan));
+create table supir(
+kode_supir varchar(7),
+nama varchar(75),
+jk varchar(11),
+alamat text,
+telp varchar(33),
+umur varchar(9),
+primary key(kode_supir));
+
+create table armada(
+plat varchar(11),
+jenis varchar(21),
+warna varchar(21),
+jlh_kursi varchar(2),
+kode_supir varchar(11),
+primary key(plat),
+foreign key(kode_supir) references supir(kode_supir) on delete cascade on update cascade);
+create table tbl_kursi(
+kode_kursi varchar(11),
+no_kursi varchar(21),
+plat varchar(11),
+primary key(kode_kursi),
+foreign key(plat) references armada(plat) on delete cascade on update cascade);
+create table penumpang(
+kode_penumpang varchar(11),
+nama varchar(75),
+alamat text,
+jk varchar(15),
+umur varchar(9),
+telp varchar(21),
+kode_tujuan varchar(11),
+kode_kursi varchar(2),
+plat varchar(11),
+tanggal date,
+primary key(kode_penumpang),
+foreign key(kode_tujuan) references tbl_tujuan(kode_tujuan) on delete cascade on update cascade,
+foreign key(kode_kursi) references tbl_kursi(kode_kursi) on delete cascade on update cascade,
+foreign key(plat) references armada(plat) on delete cascade on update cascade);
