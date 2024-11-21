@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSecondary"
+    tools:context=".ViewProduct">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/btngroup"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/photoframe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="16dp">
+
+                    <TextView
+                        android:id="@+id/productname"
+                        style="@style/product_name_onview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:text="Product Name"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp">
+
+                    <TextView
+                        android:id="@+id/desc"
+                        style="@style/product_name_detail_onview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Desc"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:background="?attr/colorPrimary05"
+        >
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:contentDescription="@string/search"
+            android:src="@drawable/arrow_back"
+            android:background="#00000000"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:contentDescription="@string/search"
+            android:src="@drawable/search"
+            android:background="#00000000"/>
+
+        <View
+            android:layout_width="16dp"
+            android:layout_height="32dp" />
+
+        <ImageButton
+            android:id="@+id/tocart"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:contentDescription="@string/cart"
+            android:src="@drawable/shopping_cart"
+            android:background="#00000000"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btngroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/colorPrimary"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:gravity="end">
+
+            <ImageButton
+                android:id="@+id/lessquantity"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/remove"
+                android:background="#00000000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:text="0"
+                android:textSize="18sp"
+                android:layout_marginHorizontal="8dp"
+                android:id="@+id/howmuchadd"
+                android:textColor="?attr/iconAccent2" />
+            <ImageButton
+                android:id="@+id/addquantity"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/addtocart"
+                android:background="#00000000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="add to cart"
+                android:textColor="?attr/iconAccent2"
+                app:strokeColor="?attr/iconAccent2"
+                app:icon="@drawable/addtocart"
+                app:iconTint="?attr/iconAccent2"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy"
+                android:textColor="?attr/iconAccent1"
+                app:strokeColor="?attr/iconAccent1"
+                app:icon="@drawable/addtocart"
+                app:iconTint="?attr/iconAccent1"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
