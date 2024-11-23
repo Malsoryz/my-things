@@ -1,6 +1,7 @@
 package com.eternity.bystro;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
+    private BystroDatabase bystrodb;
+
     public HomeFragment() {}
 
     @Override
@@ -26,49 +29,46 @@ public class HomeFragment extends Fragment {
 
         GridLayout listorder = rootview.findViewById(R.id.listorder);
 
-        MainActivity mainActivity = (MainActivity) getActivity();
-        if (mainActivity != null) {
-            ArrayList<ProductData> dataproduct = mainActivity.getDatabystro();
+        bystrodb = new BystroDatabase(getContext());
+        listorder.removeAllViews(); // Pastikan tidak ada elemen lama
+        Cursor cursor = bystrodb.getAllProduct();
 
-            for (ProductData itemdata : dataproduct){
-                String productname = itemdata.getProductname();
-                float priced = itemdata.getPrice();
-                String type = itemdata.getType();
-                String desc = itemdata.getDesc();
-                int photolink = itemdata.getPhotolink();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                try {
+                    int id = cursor.getInt(cursor.getColumnIndexOrThrow("productid"));
+                    String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                    String type = cursor.getString(cursor.getColumnIndexOrThrow("type"));
+                    String price = cursor.getString(cursor.getColumnIndexOrThrow("price"));
+                    int image = cursor.getInt(cursor.getColumnIndexOrThrow("image"));
+                    String desc = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+                    int stock = cursor.getInt(cursor.getColumnIndexOrThrow("stock"));
 
-                View griditem = getLayoutInflater().inflate(R.layout.homeitem, listorder, false);
-                MaterialCardView cardview = griditem.findViewById(R.id.cardview);
-                ImageView photoframe = griditem.findViewById(R.id.photoframe);
-                TextView name = griditem.findViewById(R.id.homeproductname);
-                TextView price = griditem.findViewById(R.id.homeproductprice);
+                    View listitem = inflater.inflate(R.layout.homeitem, listorder, false);
+                    ImageView photoframe = listitem.findViewById(R.id.photoframe);
+                    TextView productname = listitem.findViewById(R.id.homeproductname);
+                    TextView productprice = listitem.findViewById(R.id.homeproductprice);
 
-                cardview.setOnClickListener(view -> {
-                    Intent intent = new Intent(getActivity(), ViewProduct.class);
+                    photoframe.setImageResource(image);
+                    photoframe.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+                        int width = photoframe.getWidth();
+                        photoframe.getLayoutParams().height = width;
+                        photoframe.requestLayout();
+                    });
 
-                    intent.putExtra("productname",productname);
-                    intent.putExtra("price",priced);
-                    intent.putExtra("type",type);
-                    intent.putExtra("desc",desc);
-                    intent.putExtra("photolink",photolink);
+                    productname.setText(name);
+                    productprice.setText(price);
 
-                    startActivity(intent);
-                });
-                photoframe.setImageResource(photolink);
-                photoframe.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-                    int width = photoframe.getWidth();
-                    photoframe.getLayoutParams().height = width;
-                    photoframe.requestLayout();
-                });
-                name.setText(productname);
-                String parsefloat = String.valueOf((int) priced);
-                String rupiah = "Rp" + String.format("%,d", Integer.parseInt(parsefloat)).replace(",", ".");
-                price.setText(rupiah);
-
-                listorder.addView(griditem);
-            }
+                    listorder.addView(listitem);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
+            cursor.close(); // Pastikan cursor ditutup
         }
 
         return rootview;
     }
+
+
 }

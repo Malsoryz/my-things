@@ -27,24 +27,42 @@ public class BystroDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS orders");
         onCreate(db);
     }
-    public long addProduct(String name, String type, String price, int image, String desc, int stock) {
+    public void addProduct(String[][] productlist) {
         SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
 
-        ContentValues values = new ContentValues();
-        values.put("name",name);
-        values.put("type",type);
-        values.put("price",price);
-        values.put("image",image);
-        values.put("description",desc);
-        values.put("stock",stock);
+        for (String[] product : productlist) {
+            int productid = Integer.parseInt(product[0]);
+            String name = product[1];
+            String type = product[2];
+            String price = product[3];
+            int image = Integer.parseInt(product[4]);
+            String desc = product[5];
+            int quantity = Integer.parseInt(product[6]);
 
-        long result = db.insert("product_list",null,values);
-        return result;
+            ContentValues values = new ContentValues();
+            values.put("productid",productid);
+            values.put("name",name);
+            values.put("type",type);
+            values.put("price",price);
+            values.put("image",image);
+            values.put("description",desc);
+            values.put("stock",quantity);
+
+            db.insert("product_list",null,values);
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
     }
     public Cursor getAllProduct(){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM product_list;";
-        Cursor cursor = db.rawQuery(query,null);
-        return cursor;
+        return db.rawQuery(query,null);
     }
+    public void recreateTable(String tableName, String createTableQuery) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + tableName);
+        db.execSQL(createTableQuery);
+    }
+
 }
