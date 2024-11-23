@@ -41,6 +41,12 @@ public class ViewProduct extends AppCompatActivity {
         productview.setText(productname);
         descview.setText(desc);
 
+        photoframe.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int width = photoframe.getWidth();
+            photoframe.getLayoutParams().height = width;
+            photoframe.requestLayout();
+        });
+
         //set btn
         ImageButton back = findViewById(R.id.back);
         back.setOnClickListener(view -> {

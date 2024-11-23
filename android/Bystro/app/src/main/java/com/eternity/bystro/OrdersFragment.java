@@ -43,6 +43,11 @@ public class OrdersFragment extends Fragment {
                 TextView status = listitem.findViewById(R.id.status);
 
                 photoframe.setImageResource(photolink);
+                photoframe.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+                    int width = photoframe.getWidth();
+                    photoframe.getLayoutParams().height = width;
+                    photoframe.requestLayout();
+                });
                 name.setText(productname);
                 typed.setText(type);
                 String parsefloat = String.valueOf((int) priced);

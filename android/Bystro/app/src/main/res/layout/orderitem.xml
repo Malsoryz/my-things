@@ -17,6 +17,8 @@
             android:id="@+id/photoframe"
             android:layout_width="114dp"
             android:layout_height="114dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:background="?attr/Accent2"
             android:contentDescription="@string/itemphoto" />
         <LinearLayout

@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -26,15 +27,20 @@ public class MainActivity extends AppCompatActivity{
 
     private ArrayList<ProductData> databystro;
 
+    private BystroDatabase bystrodb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bystrodb = new BystroDatabase(this);
+        long result = bystrodb.addProduct("headset","red dragon","90000",R.drawable.headsetgood,"the best",100);
+
         databystro = new ArrayList<>();
 
         databystro.add(new ProductData("headset", 80000,"pro max", "this is a good headset", R.drawable.headset1));
-        databystro.add(new ProductData("headset", 80000,"pro max", "this is a best headset", R.drawable.headset1));
+        databystro.add(new ProductData("blue headset", 95000,"gaming", "this is a best headset", R.drawable.headsetgood));
 
         ImageButton tocart = findViewById(R.id.tocart);
         tocart.setOnClickListener(view -> {

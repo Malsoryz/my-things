@@ -55,6 +55,11 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                 });
                 photoframe.setImageResource(photolink);
+                photoframe.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+                    int width = photoframe.getWidth();
+                    photoframe.getLayoutParams().height = width;
+                    photoframe.requestLayout();
+                });
                 name.setText(productname);
                 String parsefloat = String.valueOf((int) priced);
                 String rupiah = "Rp" + String.format("%,d", Integer.parseInt(parsefloat)).replace(",", ".");
