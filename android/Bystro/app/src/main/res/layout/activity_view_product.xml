@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:contentDescription="@string/search"
-            android:src="@drawable/arrow_back"
+            android:src="@drawable/back_icon"
             android:background="#00000000"/>
 
         <View
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:contentDescription="@string/search"
-            android:src="@drawable/search"
+            android:src="@drawable/search_icon"
             android:background="#00000000"/>
 
         <View
@@ -109,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:contentDescription="@string/cart"
-            android:src="@drawable/shopping_cart"
+            android:src="@drawable/cart_icon"
             android:background="#00000000"/>
 
     </LinearLayout>
@@ -136,7 +136,7 @@
                 android:id="@+id/lessquantity"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/remove"
+                android:src="@drawable/remove_icon"
                 android:background="#00000000"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -145,12 +145,12 @@
                 android:textSize="18sp"
                 android:layout_marginHorizontal="8dp"
                 android:id="@+id/howmuchadd"
-                android:textColor="?attr/iconAccent2" />
+                android:textColor="?attr/Accent2" />
             <ImageButton
                 android:id="@+id/addquantity"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/addtocart"
+                android:src="@drawable/add_icon"
                 android:background="#00000000"/>
 
         </LinearLayout>
@@ -164,10 +164,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="add to cart"
-                android:textColor="?attr/iconAccent2"
-                app:strokeColor="?attr/iconAccent2"
-                app:icon="@drawable/addtocart"
-                app:iconTint="?attr/iconAccent2"
+                android:textColor="?attr/Accent2"
+                app:strokeColor="?attr/Accent2"
+                app:icon="@drawable/add_icon"
+                app:iconTint="?attr/Accent2"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="4dp"
                 />
@@ -177,10 +177,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Buy"
-                android:textColor="?attr/iconAccent1"
-                app:strokeColor="?attr/iconAccent1"
-                app:icon="@drawable/addtocart"
-                app:iconTint="?attr/iconAccent1"
+                android:textColor="?attr/Accent1"
+                app:strokeColor="?attr/Accent1"
+                app:icon="@drawable/add_icon"
+                app:iconTint="?attr/Accent1"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="4dp"
                 />

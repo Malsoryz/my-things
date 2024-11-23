@@ -1,13 +1,13 @@
 package com.eternity.bystro;
 
-public class productdata {
+public class ProductData {
     private final String productname;
     private final float price;
     private final String type;
     private final String desc;
     private final int photolink;
 
-    public productdata(String productname, float price, String type, String desc, int photolink) {
+    public ProductData(String productname, float price, String type, String desc, int photolink) {
         this.productname = productname;
         this.price = price;
         this.type = type;

@@ -34,7 +34,7 @@
 
     <style name="product_price">
         <item name="android:layout_marginHorizontal">8dp</item>
-        <item name="android:textColor">?attr/iconAccent1</item>
+        <item name="android:textColor">?attr/Accent1</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>

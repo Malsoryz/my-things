@@ -22,7 +22,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/itemphoto"
             android:scaleType="centerCrop"
-            android:background="?attr/iconAccent2"/>
+            android:background="?attr/Accent2"/>
 
         <LinearLayout
             android:layout_width="match_parent"

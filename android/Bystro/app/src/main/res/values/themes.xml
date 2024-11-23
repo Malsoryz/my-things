@@ -9,8 +9,8 @@
         <item name="colorSecondary05">@color/secondary_05</item>
         <item name="android:textColor">@color/textcolor</item>
         <item name="navbar_textcolor">@color/textcolor</item>
-        <item name="iconAccent1">@color/accent1</item>
-        <item name="iconAccent2">@color/accent2</item>
+        <item name="Accent1">@color/accent1</item>
+        <item name="Accent2">@color/accent2</item>
     </style>
 
     <style name="Theme.Bystro" parent="Base.Theme.Bystro" />

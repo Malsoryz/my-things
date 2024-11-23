@@ -1,19 +1,15 @@
 package com.eternity.bystro;
 
 import android.content.Intent;
-import android.icu.lang.UScript;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
@@ -32,9 +28,9 @@ public class HomeFragment extends Fragment {
 
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
-            ArrayList<productdata> dataproduct = mainActivity.getDatabystro();
+            ArrayList<ProductData> dataproduct = mainActivity.getDatabystro();
 
-            for (productdata itemdata : dataproduct){
+            for (ProductData itemdata : dataproduct){
                 String productname = itemdata.getProductname();
                 float priced = itemdata.getPrice();
                 String type = itemdata.getType();

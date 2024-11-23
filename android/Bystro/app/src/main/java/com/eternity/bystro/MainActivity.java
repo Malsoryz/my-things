@@ -1,8 +1,12 @@
 package com.eternity.bystro;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +18,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 
-    private ArrayList<productdata> databystro;
+    private ArrayList<ProductData> databystro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +33,8 @@ public class MainActivity extends AppCompatActivity{
 
         databystro = new ArrayList<>();
 
-        databystro.add(new productdata("headset",80000,"pro max","this is a good headset",R.drawable.headset1));
-        databystro.add(new productdata("headset",80000,"pro max","this is a best headset",R.drawable.headset1));
+        databystro.add(new ProductData("headset", 80000,"pro max", "this is a good headset", R.drawable.headset1));
+        databystro.add(new ProductData("headset", 80000,"pro max", "this is a best headset", R.drawable.headset1));
 
         ImageButton tocart = findViewById(R.id.tocart);
         tocart.setOnClickListener(view -> {
@@ -70,8 +76,7 @@ public class MainActivity extends AppCompatActivity{
         transaction.replace(R.id.content, fragment);
         transaction.commit();
     }
-
-    public ArrayList<productdata> getDatabystro() {
+    public ArrayList<ProductData> getDatabystro() {
         return databystro;
     }
 }

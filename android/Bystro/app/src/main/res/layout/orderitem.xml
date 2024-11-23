@@ -17,7 +17,7 @@
             android:id="@+id/photoframe"
             android:layout_width="114dp"
             android:layout_height="114dp"
-            android:background="?attr/iconAccent2"
+            android:background="?attr/Accent2"
             android:contentDescription="@string/itemphoto" />
         <LinearLayout
             android:layout_width="match_parent"
