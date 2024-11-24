@@ -87,14 +87,14 @@
                 android:id="@+id/itemquantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="item :"
+                android:text="item : 0"
                 android:textSize="12sp"
                 android:textColor="?attr/navbar_textcolor"/>
             <TextView
                 android:id="@+id/totalprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total :"
+                android:text="Total : 0"
                 android:textSize="20sp"
                 android:textColor="?attr/Accent1"
                 android:visibility="visible"/>

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -93,10 +94,21 @@ public class ViewProduct extends AppCompatActivity {
             String getquantity = howmuch.getText().toString();
             int quanty = Integer.parseInt(getquantity);
 
-            String[][] cartlist = {
-                    {String.valueOf(productid), String.valueOf(quanty)}
-            };
-            bystrodb.addtocart(cartlist);
+            if (quanty > 0) {
+                String[][] cartlist = {{String.valueOf(productid), String.valueOf(quanty)}};
+                try {
+                    bystrodb.addtocart(cartlist);
+                    Toast.makeText(this,"Order added to cart",Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(this,"Order failed to add to cart",Toast.LENGTH_SHORT).show();
+                    throw new RuntimeException(e);
+                }
+            } else {
+                Toast.makeText(this,"Cannot be added if empty",Toast.LENGTH_SHORT).show();
+            }
+        });
+        checkout.setOnClickListener(view -> {
+
         });
     }
 }

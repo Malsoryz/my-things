@@ -7,12 +7,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +38,10 @@ public class ViewCheckout extends AppCompatActivity {
             finish();
         });
         Intent getintent = getIntent();
+        int totalprices = getintent.getIntExtra("totalprices",0);
+        int totalitems = getintent.getIntExtra("totalitems",0);
+        int deliverypay = 31000;
+        int totalpay = totalprices + deliverypay;
         ArrayList<HashMap<String, String>> selectedItemsData = (ArrayList<HashMap<String, String>>) getintent.getSerializableExtra("selecteditem");
         if (selectedItemsData != null) {
             for (HashMap<String, String> data : selectedItemsData) {
@@ -55,11 +62,26 @@ public class ViewCheckout extends AppCompatActivity {
                 TextView quanty = selected.findViewById(R.id.quantity);
                 TextView price = selected.findViewById(R.id.price);
 
+                TextView subtotalprices = findViewById(R.id.subtotalprice);
+                TextView totalitem = findViewById(R.id.totalitems);
+                TextView delivery = findViewById(R.id.subtotaldelivery);
+                TextView totalpayment = findViewById(R.id.totalpayment);
+
+                MaterialButton makeorder = findViewById(R.id.makeorder);
+                makeorder.setOnClickListener(view -> {
+                    Toast.makeText(this,"ordered!",Toast.LENGTH_SHORT).show();
+                });
+
                 photoframe.setImageResource(image);
                 productname.setText(name);
                 type.setText(types);
                 price.setText(prices);
                 quanty.setText(String.valueOf(quantity));
+
+                subtotalprices.setText(String.valueOf(totalprices));
+                totalitem.setText(String.valueOf(totalitems));
+                delivery.setText(String.valueOf(deliverypay));
+                totalpayment.setText(String.valueOf(totalpay));
 
                 selecteditem.addView(selected);
             }

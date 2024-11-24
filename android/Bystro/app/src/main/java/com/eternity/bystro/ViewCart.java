@@ -5,10 +5,12 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -95,6 +97,31 @@ public class ViewCart extends AppCompatActivity {
                 edit.setText("Edit");
             }
         });
+
+        final int[] totalprices = {0};
+        final int[] totalitems = {0};
+
+        TextView itemquantity = findViewById(R.id.itemquantity);
+        TextView totalprice = findViewById(R.id.totalprice);
+
+        for (View itemView : cartItems) {
+            CheckBox itemselect = itemView.findViewById(R.id.itemselect);
+            itemselect.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+                CartItem item = (CartItem) itemView.getTag();
+                int perprice = Integer.parseInt(item.getPrices());
+                int peritem = item.getQuantity();
+                if (isChecked) {
+                    totalprices[0] += perprice * peritem;
+                    totalitems[0] += peritem;
+                } else {
+                    totalprices[0] -= perprice * peritem;
+                    totalitems[0] -= peritem;
+                }
+                itemquantity.setText("Items : " + totalitems[0]);
+                totalprice.setText("Total : " + totalprices[0]);
+            });
+        }
+
         MaterialButton checkout = findViewById(R.id.checkout);
         checkout.setOnClickListener(View -> {
             ArrayList<CartItem> selectedItems = new ArrayList<>();
@@ -117,10 +144,18 @@ public class ViewCart extends AppCompatActivity {
                 data.put("quantity", String.valueOf(item.getQuantity()));
                 selectedItemsData.add(data);
             }
-
-            Intent intent = new Intent(ViewCart.this,ViewCheckout.class);
-            intent.putExtra("selecteditem",selectedItemsData);
-            startActivity(intent);
+            for (View itemView : cartItems) {
+                CheckBox itemselect = itemView.findViewById(R.id.itemselect);
+                if (itemselect.isChecked()) {
+                    Intent intent = new Intent(ViewCart.this,ViewCheckout.class);
+                    intent.putExtra("selecteditem",selectedItemsData);
+                    intent.putExtra("totalprices", totalprices[0]);
+                    intent.putExtra("totalitems", totalitems[0]);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this,"Select the product first",Toast.LENGTH_SHORT).show();
+                }
+            }
         });
     }
 }
