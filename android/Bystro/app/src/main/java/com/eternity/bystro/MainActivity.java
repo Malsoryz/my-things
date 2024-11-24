@@ -1,5 +1,7 @@
 package com.eternity.bystro;
 
+import static com.eternity.bystro.BystroDBQuery.CREATE_CART_LIST_TABLE;
+import static com.eternity.bystro.BystroDBQuery.CREATE_ORDER_TABLE;
 import static com.eternity.bystro.BystroDBQuery.CREATE_PRODUCT_LIST_TABLE;
 
 import android.content.Context;
@@ -30,23 +32,34 @@ public class MainActivity extends AppCompatActivity{
 
     private ArrayList<ProductData> databystro;
 
-    private BystroDatabase bystrodb;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            return insets;
+        });
 
-        bystrodb = new BystroDatabase(this);
+        BystroDatabase bystrodb = new BystroDatabase(this);
 
         String[][] productlist = {
-                {String.valueOf(1),"headset","red dragon","90000",String.valueOf(R.drawable.headset1),"the best",String.valueOf(100)},
-                {String.valueOf(2),"headsetz","purple","100000",String.valueOf(R.drawable.headsetgood),"nice",String.valueOf(25)},
-                {String.valueOf(3),"blue headset","ice blue","120000",String.valueOf(R.drawable.blueheadset),"freeze!!!",String.valueOf(33)}
+                {"headset","red dragon","90000",String.valueOf(R.drawable.headset1),"the best",String.valueOf(100)},
+                {"headsetz","purple","100000",String.valueOf(R.drawable.headsetgood),"nice",String.valueOf(25)},
+                {"blue headset","ice blue","120000",String.valueOf(R.drawable.blueheadset),"freeze!!!",String.valueOf(33)}
         };
 
+        String[][] productlistwithid = new String[productlist.length][productlist[0].length + 1];
+        for (int i = 0; i < productlist.length; i++) {
+            productlistwithid[i][0] = String.valueOf(i + 1);
+            System.arraycopy(productlist[i], 0, productlistwithid[i], 1, productlist[i].length);
+        }
+
         bystrodb.recreateTable("product_list",CREATE_PRODUCT_LIST_TABLE);
-        bystrodb.addProduct(productlist);
+        bystrodb.recreateTable("cart_list",CREATE_CART_LIST_TABLE);
+        bystrodb.recreateTable("orders",CREATE_ORDER_TABLE);
+        bystrodb.addProduct(productlistwithid);
 
         databystro = new ArrayList<>();
 
@@ -57,12 +70,6 @@ public class MainActivity extends AppCompatActivity{
         tocart.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ViewCart.class);
             startActivity(intent);
-        });
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
-            return insets;
         });
 
         if (savedInstanceState == null) {

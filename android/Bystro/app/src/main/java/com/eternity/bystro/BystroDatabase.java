@@ -54,9 +54,34 @@ public class BystroDatabase extends SQLiteOpenHelper {
         db.setTransactionSuccessful();
         db.endTransaction();
     }
-    public Cursor getAllProduct(){
+    public void addtocart(String[][] cartlist) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+
+        for (String[] product : cartlist) {
+            int productid = Integer.parseInt(product[0]);
+            int quantity = Integer.parseInt(product[1]);
+
+            ContentValues values = new ContentValues();
+            values.put("productid",productid);
+            values.put("quantity",quantity);
+
+            db.insert("cart_list",null,values);
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
+    }
+    public Cursor getTableValue(String tableName){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM product_list;";
+        String query = "SELECT * FROM " + tableName + ";";
+        return db.rawQuery(query,null);
+    }
+    public Cursor getTableValueforCart() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT cart_list.cartid, cart_list.productid, cart_list.quantity, " +
+                "product_list.name, product_list.type, product_list.image, product_list.price " +
+                "FROM cart_list " +
+                "INNER JOIN product_list ON cart_list.productid = product_list.productid;";
         return db.rawQuery(query,null);
     }
     public void recreateTable(String tableName, String createTableQuery) {

@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.button.MaterialButton;
+
 public class ViewProduct extends AppCompatActivity {
 
     @Override
@@ -26,26 +28,28 @@ public class ViewProduct extends AppCompatActivity {
             return insets;
         });
 
+        BystroDatabase bystrodb = new BystroDatabase(this);
+
         Intent intent = getIntent();
-        String productname = intent.getStringExtra("productname");
-        float price = intent.getFloatExtra("price",0);
+        int productid = intent.getIntExtra("productid",0);
+        String productname = intent.getStringExtra("name");
         String type = intent.getStringExtra("type");
+        String price = intent.getStringExtra("price");
+        int image = intent.getIntExtra("image",0);
         String desc = intent.getStringExtra("desc");
-        int photolink = intent.getIntExtra("photolink",0);
+        int stock = intent.getIntExtra("stock",0);
 
         ImageView photoframe = findViewById(R.id.photoframe);
         TextView productview = findViewById(R.id.productname);
+        TextView typeview = findViewById(R.id.type);
+        TextView priceview = findViewById(R.id.price);
+        TextView stockview = findViewById(R.id.stock);
         TextView descview = findViewById(R.id.desc);
-
-        photoframe.setImageResource(photolink);
-        productview.setText(productname);
-        descview.setText(desc);
-
-        photoframe.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            int width = photoframe.getWidth();
-            photoframe.getLayoutParams().height = width;
-            photoframe.requestLayout();
-        });
+        ImageButton less = findViewById(R.id.lessquantity);
+        TextView howmuch = findViewById(R.id.howmuchadd);
+        ImageButton add = findViewById(R.id.addquantity);
+        MaterialButton addtocart = findViewById(R.id.addtocart);
+        MaterialButton checkout = findViewById(R.id.checkout);
 
         //set btn
         ImageButton back = findViewById(R.id.back);
@@ -57,10 +61,6 @@ public class ViewProduct extends AppCompatActivity {
             Intent anointent = new Intent(ViewProduct.this,ViewCart.class);
             startActivity(anointent);
         });
-
-        ImageButton less = findViewById(R.id.lessquantity);
-        TextView howmuch = findViewById(R.id.howmuchadd);
-        ImageButton add = findViewById(R.id.addquantity);
 
         less.setOnClickListener(view -> {
             String much = howmuch.getText().toString();
@@ -76,6 +76,27 @@ public class ViewProduct extends AppCompatActivity {
             float quantity = Float.parseFloat(much);
             quantity += 1;
             howmuch.setText(String.valueOf((int) quantity));
+        });
+        photoframe.setImageResource(image);
+        photoframe.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            int width = photoframe.getWidth();
+            photoframe.getLayoutParams().height = width;
+            photoframe.requestLayout();
+        });
+        productview.setText(productname);
+        typeview.setText(type);
+        priceview.setText(price);
+        stockview.setText("Stock " + stock);
+        descview.setText(desc);
+
+        addtocart.setOnClickListener(view -> {
+            String getquantity = howmuch.getText().toString();
+            int quanty = Integer.parseInt(getquantity);
+
+            String[][] cartlist = {
+                    {String.valueOf(productid), String.valueOf(quanty)}
+            };
+            bystrodb.addtocart(cartlist);
         });
     }
 }

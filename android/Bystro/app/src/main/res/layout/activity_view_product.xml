@@ -37,16 +37,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/colorPrimary"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="16dp">
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/productname"
                         style="@style/product_name_onview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
                         android:text="Product Name"/>
+                    <TextView
+                        android:id="@+id/type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/navbar_textcolor"
+                        android:alpha="0.7"
+                        android:textSize="12sp"
+                        android:text="type"/>
 
                 </LinearLayout>
 
@@ -54,7 +62,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp">
+                    android:paddingVertical="4dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/price"
+                        style="@style/product_price_onView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="price"/>
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/stock"
+                        style="@style/product_stock_onView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="stock"
+                        android:alpha="0.5"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="4dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/desc"
@@ -161,6 +199,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/addtocart"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -174,13 +213,14 @@
                 />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/checkout"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buy"
+                android:text="Checkout"
                 android:textColor="?attr/Accent1"
                 app:strokeColor="?attr/Accent1"
-                app:icon="@drawable/add_icon"
+                app:icon="@drawable/buy_icon"
                 app:iconTint="?attr/Accent1"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="4dp"

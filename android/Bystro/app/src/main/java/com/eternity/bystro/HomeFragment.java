@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
-    private BystroDatabase bystrodb;
-
     public HomeFragment() {}
 
     @Override
@@ -29,9 +27,8 @@ public class HomeFragment extends Fragment {
 
         GridLayout listorder = rootview.findViewById(R.id.listorder);
 
-        bystrodb = new BystroDatabase(getContext());
-        listorder.removeAllViews(); // Pastikan tidak ada elemen lama
-        Cursor cursor = bystrodb.getAllProduct();
+        BystroDatabase bystrodb = new BystroDatabase(getContext());
+        Cursor cursor = bystrodb.getTableValue("product_list");
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -45,9 +42,23 @@ public class HomeFragment extends Fragment {
                     int stock = cursor.getInt(cursor.getColumnIndexOrThrow("stock"));
 
                     View listitem = inflater.inflate(R.layout.homeitem, listorder, false);
+                    MaterialCardView cardview = listitem.findViewById(R.id.cardview);
                     ImageView photoframe = listitem.findViewById(R.id.photoframe);
                     TextView productname = listitem.findViewById(R.id.homeproductname);
                     TextView productprice = listitem.findViewById(R.id.homeproductprice);
+
+                    cardview.setOnClickListener(view -> {
+                        Intent intent = new Intent(requireContext(),ViewProduct.class);
+                        intent.putExtra("productid",id);
+                        intent.putExtra("name",name);
+                        intent.putExtra("type",type);
+                        intent.putExtra("price",price);
+                        intent.putExtra("image",image);
+                        intent.putExtra("desc",desc);
+                        intent.putExtra("stock",stock);
+
+                        startActivity(intent);
+                    });
 
                     photoframe.setImageResource(image);
                     photoframe.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
@@ -60,11 +71,11 @@ public class HomeFragment extends Fragment {
                     productprice.setText(price);
 
                     listorder.addView(listitem);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (IllegalArgumentException e) {
+                    throw new RuntimeException(e);
                 }
             } while (cursor.moveToNext());
-            cursor.close(); // Pastikan cursor ditutup
+            cursor.close();
         }
 
         return rootview;
