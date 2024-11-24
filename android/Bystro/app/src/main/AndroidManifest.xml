@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Bystro"
         tools:targetApi="31">
         <activity
+            android:name=".ViewCheckout"
+            android:exported="false" />
+        <activity
             android:name=".ViewCart"
             android:exported="false" />
         <activity

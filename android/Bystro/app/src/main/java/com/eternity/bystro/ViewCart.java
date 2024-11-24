@@ -1,5 +1,6 @@
 package com.eternity.bystro;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class ViewCart extends AppCompatActivity {
 
     @Override
@@ -32,8 +36,10 @@ public class ViewCart extends AppCompatActivity {
         });
         BystroDatabase bystrodb = new BystroDatabase(this);
         Cursor cursor = bystrodb.getTableValueforCart();
+        ArrayList<View> cartItems = new ArrayList<>();
 
         if (cursor != null && cursor.moveToFirst()) {
+            LinearLayout listcart = findViewById(R.id.cartlist);
             do {
                 try {
                     int cartid = cursor.getInt(cursor.getColumnIndexOrThrow("cartid"));
@@ -44,10 +50,8 @@ public class ViewCart extends AppCompatActivity {
                     String prices = cursor.getString(cursor.getColumnIndexOrThrow("price"));
                     int image = cursor.getInt(cursor.getColumnIndexOrThrow("image"));
 
-                    LinearLayout listcart = findViewById(R.id.cartlist);
-
                     View listitem = getLayoutInflater().inflate(R.layout.cartitem,listcart,false);
-                    CheckBox itemselect = listitem.findViewById(R.id.itemselect);
+
                     ImageView photoframe = listitem.findViewById(R.id.photoframe);
                     TextView productname = listitem.findViewById(R.id.productname);
                     TextView type = listitem.findViewById(R.id.type);
@@ -60,7 +64,10 @@ public class ViewCart extends AppCompatActivity {
                     price.setText(prices);
                     quanty.setText(String.valueOf(quantity));
 
+                    listitem.setTag(new CartItem(cartid, image, name, productid, types, prices, quantity));
+
                     listcart.addView(listitem);
+                    cartItems.add(listitem);
                 } catch (IllegalArgumentException e) {
                     throw new RuntimeException(e);
                 }
@@ -87,6 +94,33 @@ public class ViewCart extends AppCompatActivity {
                 delete.setVisibility(View.GONE);
                 edit.setText("Edit");
             }
+        });
+        MaterialButton checkout = findViewById(R.id.checkout);
+        checkout.setOnClickListener(View -> {
+            ArrayList<CartItem> selectedItems = new ArrayList<>();
+            for (View itemView : cartItems) {
+                CheckBox itemselect = itemView.findViewById(R.id.itemselect);
+                if (itemselect.isChecked()) {
+                    CartItem item = (CartItem) itemView.getTag();
+                    selectedItems.add(item);
+                }
+            }
+            ArrayList<HashMap<String, String>> selectedItemsData = new ArrayList<>();
+            for (CartItem item : selectedItems) {
+                HashMap<String, String> data = new HashMap<>();
+                data.put("cartid", String.valueOf(item.getCartid()));
+                data.put("image", String.valueOf(item.getImage()));
+                data.put("name", item.getName());
+                data.put("productid", String.valueOf(item.getProductid()));
+                data.put("types", item.getTypes());
+                data.put("prices", item.getPrices());
+                data.put("quantity", String.valueOf(item.getQuantity()));
+                selectedItemsData.add(data);
+            }
+
+            Intent intent = new Intent(ViewCart.this,ViewCheckout.class);
+            intent.putExtra("selecteditem",selectedItemsData);
+            startActivity(intent);
         });
     }
 }

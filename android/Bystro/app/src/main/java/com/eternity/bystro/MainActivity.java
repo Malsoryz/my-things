@@ -30,8 +30,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 
-    private ArrayList<ProductData> databystro;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +58,6 @@ public class MainActivity extends AppCompatActivity{
         bystrodb.recreateTable("cart_list",CREATE_CART_LIST_TABLE);
         bystrodb.recreateTable("orders",CREATE_ORDER_TABLE);
         bystrodb.addProduct(productlistwithid);
-
-        databystro = new ArrayList<>();
-
-        databystro.add(new ProductData("headset", 80000,"pro max", "this is a good headset", R.drawable.headset1));
-        databystro.add(new ProductData("blue headset", 95000,"gaming", "this is a best headset", R.drawable.headsetgood));
 
         ImageButton tocart = findViewById(R.id.tocart);
         tocart.setOnClickListener(view -> {
@@ -99,8 +92,5 @@ public class MainActivity extends AppCompatActivity{
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content, fragment);
         transaction.commit();
-    }
-    public ArrayList<ProductData> getDatabystro() {
-        return databystro;
     }
 }

@@ -15,8 +15,7 @@
         android:layout_alignParentTop="true"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
-        android:background="?attr/colorPrimary"
-        >
+        android:background="?attr/colorPrimary" >
 
         <TextView
             android:layout_width="wrap_content"
