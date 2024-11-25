@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ViewProduct extends AppCompatActivity {
 
@@ -36,14 +37,14 @@ public class ViewProduct extends AppCompatActivity {
 
         bystrodb = new BystroDatabase(this);
 
-        Intent intent = getIntent();
-        int productid = intent.getIntExtra("productid",0);
-        String productname = intent.getStringExtra("name");
-        String type = intent.getStringExtra("type");
-        String price = intent.getStringExtra("price");
-        int image = intent.getIntExtra("image",0);
-        String desc = intent.getStringExtra("desc");
-        int stock = intent.getIntExtra("stock",0);
+        Intent getintent = getIntent();
+        int productid = getintent.getIntExtra("productid",0);
+        String productname = getintent.getStringExtra("name");
+        String type = getintent.getStringExtra("type");
+        String price = getintent.getStringExtra("price");
+        int image = getintent.getIntExtra("image",0);
+        String desc = getintent.getStringExtra("desc");
+        int stock = getintent.getIntExtra("stock",0);
 
         ImageView photoframe = findViewById(R.id.photoframe);
         TextView productview = findViewById(R.id.productname);
@@ -57,6 +58,9 @@ public class ViewProduct extends AppCompatActivity {
         MaterialButton addtocart = findViewById(R.id.addtocart);
         MaterialButton checkout = findViewById(R.id.checkout);
 
+        String getquantity = howmuch.getText().toString();
+        int quanty = Integer.parseInt(getquantity);
+
         //set btn
         ImageButton back = findViewById(R.id.back);
         back.setOnClickListener(view -> {
@@ -64,8 +68,8 @@ public class ViewProduct extends AppCompatActivity {
         });
         ImageButton tocart = findViewById(R.id.tocart);
         tocart.setOnClickListener(view -> {
-            Intent anointent = new Intent(ViewProduct.this,ViewCart.class);
-            startActivity(anointent);
+            Intent intent = new Intent(ViewProduct.this,ViewCart.class);
+            startActivity(intent);
         });
 
         less.setOnClickListener(view -> {
@@ -99,9 +103,6 @@ public class ViewProduct extends AppCompatActivity {
         descview.setText(desc);
 
         addtocart.setOnClickListener(view -> {
-            String getquantity = howmuch.getText().toString();
-            int quanty = Integer.parseInt(getquantity);
-
             if (quanty > 0) {
                 try {
                     if (bystrodb.checkProductInCart(productid)) {
@@ -119,7 +120,24 @@ public class ViewProduct extends AppCompatActivity {
         });
 
         checkout.setOnClickListener(view -> {
+            int perprice = Integer.parseInt(price);
+            int totalprice = perprice * quanty;
 
+            ArrayList<HashMap<String, String>> selectedItemsData = new ArrayList<>();
+            HashMap<String, String> data = new HashMap<>();
+            data.put("image", String.valueOf(image));
+            data.put("name", productname);
+            data.put("productid", String.valueOf(productid));
+            data.put("types", type);
+            data.put("prices", price);
+            data.put("quantity", String.valueOf(quanty));
+            selectedItemsData.add(data);
+
+            Intent intent = new Intent(this,ViewCheckout.class);
+            intent.putExtra("selecteditem",selectedItemsData);
+            intent.putExtra("totalprices",totalprice);
+            intent.putExtra("totalitems",quanty);
+            startActivity(intent);
         });
     }
     private void updateCartQuantity(int productid, int quanty) {

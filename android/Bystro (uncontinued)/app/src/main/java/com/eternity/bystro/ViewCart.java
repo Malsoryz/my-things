@@ -83,10 +83,10 @@ public class ViewCart extends AppCompatActivity {
             finish();
         });
         TextView edit = findViewById(R.id.editcart);
+        LinearLayout totallayout = findViewById(R.id.totalall);
+        MaterialButton checkout = findViewById(R.id.checkout);
+        MaterialButton delete = findViewById(R.id.delete);
         edit.setOnClickListener(view -> {
-            LinearLayout totallayout = findViewById(R.id.totalall);
-            MaterialButton checkout = findViewById(R.id.checkout);
-            MaterialButton delete = findViewById(R.id.delete);
             if (totallayout.getVisibility() == View.VISIBLE && checkout.getVisibility() == View.VISIBLE && delete.getVisibility() == View.GONE) {
                 totallayout.setVisibility(View.GONE);
                 checkout.setVisibility(View.GONE);
@@ -123,8 +123,6 @@ public class ViewCart extends AppCompatActivity {
                 totalprice.setText("Total : " + MainActivity.formatIntToRP(totalprices[0]));
             });
         }
-
-        MaterialButton checkout = findViewById(R.id.checkout);
         checkout.setOnClickListener(View -> {
             ArrayList<CartItem> selectedItems = new ArrayList<>();
             for (View itemView : cartItems) {
@@ -137,7 +135,6 @@ public class ViewCart extends AppCompatActivity {
             ArrayList<HashMap<String, String>> selectedItemsData = new ArrayList<>();
             for (CartItem item : selectedItems) {
                 HashMap<String, String> data = new HashMap<>();
-                data.put("cartid", String.valueOf(item.getCartid()));
                 data.put("image", String.valueOf(item.getImage()));
                 data.put("name", item.getName());
                 data.put("productid", String.valueOf(item.getProductid()));
@@ -156,5 +153,43 @@ public class ViewCart extends AppCompatActivity {
                 Toast.makeText(this,"Select the product first",Toast.LENGTH_SHORT).show();
             }
         });
+        delete.setOnClickListener(view -> {
+            ArrayList<View> itemsToRemove = new ArrayList<>();
+            ArrayList<CartItem> itemsToDelete = new ArrayList<>();
+
+            for (View itemView : cartItems) {
+                CheckBox itemselect = itemView.findViewById(R.id.itemselect);
+                if (itemselect.isChecked()) {
+                    CartItem item = (CartItem) itemView.getTag();
+                    int cartid = item.getCartid();
+
+                    int perprice = Integer.parseInt(item.getPrices());
+                    int peritem = item.getQuantity();
+
+                    totalprices[0] -= perprice * peritem;
+                    totalitems[0] -= peritem;
+
+                    itemsToRemove.add(itemView);
+                    itemsToDelete.add(item);
+                }
+            }
+            LinearLayout listcart = findViewById(R.id.cartlist);
+            for (View itemView : itemsToRemove) {
+                listcart.removeView(itemView);
+                cartItems.remove(itemView);
+            }
+            for (CartItem item : itemsToDelete) {
+                bystrodb.deleteCartItem(item.getCartid());
+            }
+            itemquantity.setText("Items : " + totalitems[0]);
+            totalprice.setText("Total : " + MainActivity.formatIntToRP(totalprices[0]));
+
+            if (itemsToRemove.isEmpty()) {
+                Toast.makeText(this, "No items selected for deletion", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Items removed from cart", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

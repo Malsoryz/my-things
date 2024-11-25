@@ -50,7 +50,6 @@ public class ViewCheckout extends AppCompatActivity {
         ArrayList<HashMap<String, String>> selectedItemsData = (ArrayList<HashMap<String, String>>) getintent.getSerializableExtra("selecteditem");
         if (selectedItemsData != null) {
             for (HashMap<String, String> data : selectedItemsData) {
-                int cartid = Integer.parseInt(Objects.requireNonNull(data.get("cartid")));
                 int image = Integer.parseInt(Objects.requireNonNull(data.get("image")));
                 String name = data.get("name");
                 int productid = Integer.parseInt(Objects.requireNonNull(data.get("productid")));

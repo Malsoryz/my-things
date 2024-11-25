@@ -134,6 +134,11 @@ public class BystroDatabase extends SQLiteOpenHelper {
         String query = "UPDATE cart_list SET quantity = quantity + ? WHERE productid = ?";
         db.execSQL(query, new Object[]{quantity, productId});
     }
+    public void deleteCartItem(int cartid) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM cart_list WHERE cartid = ?";
+        db.execSQL(query, new Object[]{cartid});
+    }
     public void recreateTable(String tableName, String createTableQuery) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
