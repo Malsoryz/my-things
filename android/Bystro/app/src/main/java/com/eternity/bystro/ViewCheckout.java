@@ -37,6 +37,11 @@ public class ViewCheckout extends AppCompatActivity {
         back.setOnClickListener(view -> {
             finish();
         });
+        LinearLayout address = findViewById(R.id.setaddress);
+        address.setOnClickListener(view -> {
+            Intent intent = new Intent(this,ViewSetAddress.class);
+            startActivity(intent);
+        });
         Intent getintent = getIntent();
         int totalprices = getintent.getIntExtra("totalprices",0);
         int totalitems = getintent.getIntExtra("totalitems",0);
@@ -51,6 +56,7 @@ public class ViewCheckout extends AppCompatActivity {
                 int productid = Integer.parseInt(Objects.requireNonNull(data.get("productid")));
                 String types = data.get("types");
                 String prices = data.get("prices");
+                int preprice = Integer.parseInt(prices);
                 int quantity = Integer.parseInt(Objects.requireNonNull(data.get("quantity")));
 
                 LinearLayout selecteditem = findViewById(R.id.selecteditem);
@@ -75,13 +81,13 @@ public class ViewCheckout extends AppCompatActivity {
                 photoframe.setImageResource(image);
                 productname.setText(name);
                 type.setText(types);
-                price.setText(prices);
-                quanty.setText(String.valueOf(quantity));
+                quanty.setText("Items : "+String.valueOf(quantity));
+                price.setText("Per Item : "+MainActivity.formatIntToRP(preprice));
 
-                subtotalprices.setText(String.valueOf(totalprices));
+                subtotalprices.setText(MainActivity.formatIntToRP(totalprices));
                 totalitem.setText(String.valueOf(totalitems));
-                delivery.setText(String.valueOf(deliverypay));
-                totalpayment.setText(String.valueOf(totalpay));
+                delivery.setText(MainActivity.formatIntToRP(deliverypay));
+                totalpayment.setText(MainActivity.formatIntToRP(totalpay));
 
                 selecteditem.addView(selected);
             }

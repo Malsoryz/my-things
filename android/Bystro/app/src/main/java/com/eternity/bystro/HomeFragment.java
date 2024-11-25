@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment {
         GridLayout listorder = rootview.findViewById(R.id.listorder);
 
         BystroDatabase bystrodb = new BystroDatabase(getContext());
-        Cursor cursor = bystrodb.getTableValue("product_list");
+        Cursor cursor = bystrodb.getTableValues("product_list");
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -68,7 +68,8 @@ public class HomeFragment extends Fragment {
                     });
 
                     productname.setText(name);
-                    productprice.setText(price);
+                    int preprice = Integer.parseInt(price);
+                    productprice.setText(MainActivity.formatIntToRP(preprice));
 
                     listorder.addView(listitem);
                 } catch (IllegalArgumentException e) {

@@ -37,7 +37,8 @@ public class ViewCart extends AppCompatActivity {
             return insets;
         });
         BystroDatabase bystrodb = new BystroDatabase(this);
-        Cursor cursor = bystrodb.getTableValueforCart();
+        Cursor cursor = bystrodb.getTableValuesForCart();
+
         ArrayList<View> cartItems = new ArrayList<>();
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -63,7 +64,8 @@ public class ViewCart extends AppCompatActivity {
                     photoframe.setImageResource(image);
                     productname.setText(name);
                     type.setText(types);
-                    price.setText(prices);
+                    int preprice = Integer.parseInt(prices);
+                    price.setText(MainActivity.formatIntToRP(preprice));
                     quanty.setText(String.valueOf(quantity));
 
                     listitem.setTag(new CartItem(cartid, image, name, productid, types, prices, quantity));
@@ -118,7 +120,7 @@ public class ViewCart extends AppCompatActivity {
                     totalitems[0] -= peritem;
                 }
                 itemquantity.setText("Items : " + totalitems[0]);
-                totalprice.setText("Total : " + totalprices[0]);
+                totalprice.setText("Total : " + MainActivity.formatIntToRP(totalprices[0]));
             });
         }
 
@@ -144,17 +146,14 @@ public class ViewCart extends AppCompatActivity {
                 data.put("quantity", String.valueOf(item.getQuantity()));
                 selectedItemsData.add(data);
             }
-            for (View itemView : cartItems) {
-                CheckBox itemselect = itemView.findViewById(R.id.itemselect);
-                if (itemselect.isChecked()) {
-                    Intent intent = new Intent(ViewCart.this,ViewCheckout.class);
-                    intent.putExtra("selecteditem",selectedItemsData);
-                    intent.putExtra("totalprices", totalprices[0]);
-                    intent.putExtra("totalitems", totalitems[0]);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(this,"Select the product first",Toast.LENGTH_SHORT).show();
-                }
+            if (!selectedItems.isEmpty()) {
+                Intent intent = new Intent(ViewCart.this,ViewCheckout.class);
+                intent.putExtra("selecteditem",selectedItemsData);
+                intent.putExtra("totalprices", totalprices[0]);
+                intent.putExtra("totalitems", totalitems[0]);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this,"Select the product first",Toast.LENGTH_SHORT).show();
             }
         });
     }

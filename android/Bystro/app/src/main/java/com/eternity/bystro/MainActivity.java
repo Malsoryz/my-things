@@ -1,8 +1,8 @@
 package com.eternity.bystro;
 
-import static com.eternity.bystro.BystroDBQuery.CREATE_CART_LIST_TABLE;
-import static com.eternity.bystro.BystroDBQuery.CREATE_ORDER_TABLE;
-import static com.eternity.bystro.BystroDBQuery.CREATE_PRODUCT_LIST_TABLE;
+import static com.eternity.bystro.BystroDatabase.CREATE_CART_LIST_TABLE;
+import static com.eternity.bystro.BystroDatabase.CREATE_ORDER_TABLE;
+import static com.eternity.bystro.BystroDatabase.CREATE_PRODUCT_LIST_TABLE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +26,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -92,5 +94,10 @@ public class MainActivity extends AppCompatActivity{
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content, fragment);
         transaction.commit();
+    }
+
+    public static String formatIntToRP(int number) {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("id","ID"));
+        return formatter.format(number).replace(",00","");
     }
 }

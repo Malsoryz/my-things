@@ -1,6 +1,7 @@
 package com.eternity.bystro;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,7 +17,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 
+import java.util.ArrayList;
+
 public class ViewProduct extends AppCompatActivity {
+
+    private BystroDatabase bystrodb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,7 @@ public class ViewProduct extends AppCompatActivity {
             return insets;
         });
 
-        BystroDatabase bystrodb = new BystroDatabase(this);
+        bystrodb = new BystroDatabase(this);
 
         Intent intent = getIntent();
         int productid = intent.getIntExtra("productid",0);
@@ -75,8 +80,10 @@ public class ViewProduct extends AppCompatActivity {
         add.setOnClickListener(view -> {
             String much = howmuch.getText().toString();
             float quantity = Float.parseFloat(much);
-            quantity += 1;
-            howmuch.setText(String.valueOf((int) quantity));
+            if (quantity < stock) {
+                quantity += 1;
+                howmuch.setText(String.valueOf((int) quantity));
+            }
         });
         photoframe.setImageResource(image);
         photoframe.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
@@ -86,7 +93,8 @@ public class ViewProduct extends AppCompatActivity {
         });
         productview.setText(productname);
         typeview.setText(type);
-        priceview.setText(price);
+        int preprice = Integer.parseInt(price);
+        priceview.setText(MainActivity.formatIntToRP(preprice));
         stockview.setText("Stock " + stock);
         descview.setText(desc);
 
@@ -95,20 +103,39 @@ public class ViewProduct extends AppCompatActivity {
             int quanty = Integer.parseInt(getquantity);
 
             if (quanty > 0) {
-                String[][] cartlist = {{String.valueOf(productid), String.valueOf(quanty)}};
                 try {
-                    bystrodb.addtocart(cartlist);
-                    Toast.makeText(this,"Order added to cart",Toast.LENGTH_SHORT).show();
+                    if (bystrodb.checkProductInCart(productid)) {
+                        updateCartQuantity(productid,quanty);
+                    } else {
+                        String[][] cartlist = {{String.valueOf(productid), String.valueOf(quanty)}};
+                        addToCart(cartlist);
+                    }
                 } catch (Exception e) {
-                    Toast.makeText(this,"Order failed to add to cart",Toast.LENGTH_SHORT).show();
-                    throw new RuntimeException(e);
+                    Toast.makeText(this, "Order failed to add to cart", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(this,"Cannot be added if empty",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cannot be added if quantity is 0", Toast.LENGTH_SHORT).show();
             }
         });
+
         checkout.setOnClickListener(view -> {
 
         });
+    }
+    private void updateCartQuantity(int productid, int quanty) {
+        try {
+            bystrodb.updateCartQuantity(productid, quanty);
+            Toast.makeText(this, "Cart updated", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Error updating cart", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void addToCart(String[][] cartlist) {
+        try {
+            bystrodb.addToCart(cartlist);
+            Toast.makeText(this, "Order added to cart", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Error adding to cart", Toast.LENGTH_SHORT).show();
+        }
     }
 }
