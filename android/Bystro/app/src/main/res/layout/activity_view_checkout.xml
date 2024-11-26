@@ -155,14 +155,23 @@
                         android:layout_height="wrap_content"
                         android:text="Address"
                         android:textColor="?attr/navbar_textcolor"
-                        android:textSize="16dp"/>
+                        android:textSize="16sp"/>
 
                     <TextView
+                        android:id="@+id/addressusername"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Addressfdghdbshjfbwudsoxljfdm fdgjvsdnkg dnvm,dsknvds gmvmv msvj,vn sm "
+                        android:text="None"
                         android:textColor="?attr/navbar_textcolor"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
+                        android:alpha="0.7"/>
+                    <TextView
+                        android:id="@+id/addresses"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Select Address"
+                        android:textColor="?attr/navbar_textcolor"
+                        android:textSize="12sp"
                         android:alpha="0.7"/>
 
                 </LinearLayout>

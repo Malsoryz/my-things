@@ -1,6 +1,6 @@
 package com.eternity.bystro;
 
-import static com.eternity.bystro.BystroDatabase.CREATE_CART_LIST_TABLE;
+import static com.eternity.bystro.BystroDatabase.CREATE_ADDRESS_TABLE;
 import static com.eternity.bystro.BystroDatabase.CREATE_ORDER_TABLE;
 import static com.eternity.bystro.BystroDatabase.CREATE_PRODUCT_LIST_TABLE;
 
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity{
         }
 
         bystrodb.recreateTable("product_list",CREATE_PRODUCT_LIST_TABLE);
+        bystrodb.recreateTable("address",CREATE_ADDRESS_TABLE);
         bystrodb.recreateTable("orders",CREATE_ORDER_TABLE);
         bystrodb.addProduct(productlistwithid);
 

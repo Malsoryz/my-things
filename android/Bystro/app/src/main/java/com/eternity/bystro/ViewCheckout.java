@@ -42,12 +42,19 @@ public class ViewCheckout extends AppCompatActivity {
         int intentquantity = getintent.getIntExtra("quantity",0);
         int intentprice = getintent.getIntExtra("price",0);
 
+        //items
         ImageView photoframe = findViewById(R.id.photoframe);
         TextView productname = findViewById(R.id.productname);
         TextView type = findViewById(R.id.type);
         TextView quantity = findViewById(R.id.quantity);
         TextView perprice = findViewById(R.id.price);
 
+        //address
+        TextView addressusername = findViewById(R.id.addressusername);
+        TextView addresses = findViewById(R.id.addresses);
+        boolean selected = false;
+
+        //calculate payment
         TextView subtotalprice = findViewById(R.id.subtotalprice);
         TextView totalitems = findViewById(R.id.totalitems);
         TextView subtotaldelivery = findViewById(R.id.subtotaldelivery);

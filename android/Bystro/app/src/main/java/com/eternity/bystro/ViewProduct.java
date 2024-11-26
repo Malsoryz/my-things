@@ -109,13 +109,18 @@ public class ViewProduct extends AppCompatActivity {
         descview.setText(desc);
 
         checkout.setOnClickListener(view -> {
-            Intent intent = new Intent(this,ViewCheckout.class);
-            intent.putExtra("image",image);
-            intent.putExtra("productname",productname);
-            intent.putExtra("type",type);
-            intent.putExtra("quantity",Integer.parseInt(howmuch.getText().toString()));
-            intent.putExtra("price",price);
-            startActivity(intent);
+            int quantity = Integer.parseInt(howmuch.getText().toString());
+            if (quantity > 0) {
+                Intent intent = new Intent(this,ViewCheckout.class);
+                intent.putExtra("image",image);
+                intent.putExtra("productname",productname);
+                intent.putExtra("type",type);
+                intent.putExtra("quantity",Integer.parseInt(howmuch.getText().toString()));
+                intent.putExtra("price",price);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this,"Add items first!",Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

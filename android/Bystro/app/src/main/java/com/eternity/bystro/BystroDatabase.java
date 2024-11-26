@@ -19,12 +19,6 @@ public class BystroDatabase extends SQLiteOpenHelper {
                     "image INTEGER, "+
                     "description TEXT, "+
                     "stock INTEGER);";
-    public static final String CREATE_CART_LIST_TABLE =
-            "CREATE TABLE cart_list ("+
-                    "cartid INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                    "productid INTEGER, "+
-                    "quantity INTEGER, "+
-                    "FOREIGN KEY (productid) REFERENCES product_list(productid));";
     public static final String CREATE_ORDER_TABLE =
             "CREATE TABLE orders ("+
                     "orderid INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -45,7 +39,6 @@ public class BystroDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_PRODUCT_LIST_TABLE);
-        db.execSQL(CREATE_CART_LIST_TABLE);
         db.execSQL(CREATE_ORDER_TABLE);
         db.execSQL(CREATE_ADDRESS_TABLE);
     }
@@ -53,7 +46,6 @@ public class BystroDatabase extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS product_list");
-        db.execSQL("DROP TABLE IF EXISTS cart_list");
         db.execSQL("DROP TABLE IF EXISTS orders");
         db.execSQL("DROP TABLE IF EXISTS address");
         onCreate(db);
@@ -86,22 +78,17 @@ public class BystroDatabase extends SQLiteOpenHelper {
         db.setTransactionSuccessful();
         db.endTransaction();
     }
+    public void addNewAddress(String username, String address) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username",username);
+        values.put("useraddress",address);
+        db.insert("address", null, values);
+    }
     public Cursor getTableValues(String tableName) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + tableName;
         return db.rawQuery(query, null);
-    }
-    public boolean checkProductInCart(int productId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT COUNT(*) FROM cart_list WHERE productid = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(productId)});
-        boolean exists = false;
-
-        if (cursor.moveToFirst()) {
-            exists = cursor.getInt(0) > 0;
-        }
-        cursor.close();
-        return exists;
     }
     public void recreateTable(String tableName, String createTableQuery) {
         SQLiteDatabase db = this.getWritableDatabase();
