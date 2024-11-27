@@ -71,6 +71,7 @@ public class ViewCheckout extends AppCompatActivity {
             addressusername.setText("None");
             addresses.setText("Select Address");
         }
+
         LinearLayout address = findViewById(R.id.setaddress);
         address.setOnClickListener(gotoaddress -> {
             Intent intent = new Intent(this,ViewSetAddress.class);
@@ -134,9 +135,8 @@ public class ViewCheckout extends AppCompatActivity {
             if (cursor != null && cursor.moveToFirst()) {
                 int getaddressid = cursor.getInt(cursor.getColumnIndexOrThrow("addressid"));
                 String getpayment = selectedpayment.getText().toString();
-
                 try {
-                    bystrodb.makeOrder(productid,getaddressid,intentquantity,getpayment,stock);
+                    bystrodb.makeOrder(productid,getaddressid,intentquantity,getpayment,preprice,delivery,stock);
                     Toast.makeText(this, "Product ordered!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this,MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

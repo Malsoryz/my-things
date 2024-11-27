@@ -28,8 +28,10 @@ public class BystroDatabase extends SQLiteOpenHelper {
             "CREATE TABLE orders ("+
                     "orderid INTEGER PRIMARY KEY AUTOINCREMENT, "+
                     "productid INTEGER, "+
+                    "totalprice INTEGER, "+
                     "quantity INTEGER, "+
-                    "addressid INTEGER,"+
+                    "delivery INTEGER, "+
+                    "addressid INTEGER, "+
                     "payment VARCHAR(10), "+
                     "status VARCHAR(50), "+
                     "FOREIGN KEY (productid) REFERENCES product_list(productid),"+
@@ -120,14 +122,16 @@ public class BystroDatabase extends SQLiteOpenHelper {
             db.endTransaction();
         }
     }
-    public void makeOrder(int productid, int addressid, int quantity, String payment, int prestock) {
+    public void makeOrder(int productid, int addressid, int quantity, String payment, int totalprice, int delivery, int prestock) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("productid",productid);
         values.put("addressid",addressid);
+        values.put("totalprice",totalprice);
         values.put("quantity",quantity);
+        values.put("delivery",delivery);
         values.put("payment",payment);
-        values.put("status","Processing Order...");
+        values.put("status","Processing Order");
         ContentValues updatestock = new ContentValues();
         int stock = prestock - quantity;
         updatestock.put("stock",stock);
@@ -136,11 +140,15 @@ public class BystroDatabase extends SQLiteOpenHelper {
     }
     public Cursor getAllTable() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT product_list.*, address.*, orders.orderid, orders.quantity, orders.payment, orders.status "+
+        String query = "SELECT product_list.*, address.*, orders.orderid, orders.quantity, orders.payment, orders.status, orders.totalprice, orders.delivery "+
                 "FROM product_list, address, orders "+
                 "WHERE product_list.productid = orders.productid "+
                 "AND address.addressid = orders.addressid;";
         return db.rawQuery(query,null);
+    }
+    public void cancelorders(int orderid) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("orders","orderid = ?",new String[]{String.valueOf(orderid)});
     }
     public Cursor getTableValues(String tableName) {
         SQLiteDatabase db = this.getReadableDatabase();

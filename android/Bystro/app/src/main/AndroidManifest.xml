@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Bystro"
         tools:targetApi="31">
         <activity
+            android:name=".SeeOrders"
+            android:exported="false" />
+        <activity
             android:name=".ViewSetAddress"
             android:exported="false" />
         <activity

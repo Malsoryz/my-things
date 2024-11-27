@@ -11,8 +11,10 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -34,6 +36,12 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity{
 
+    private String[][] productlist = {
+            {"Glidex Phantom", "GX-300", "249000", String.valueOf(R.drawable.mouse1), "Glidex Phantom GX-300 adalah mouse gaming ergonomis dengan desain futuristik yang memadukan kenyamanan dan performa tinggi. Mouse ini dirancang khusus untuk gamer yang membutuhkan akurasi, kecepatan, dan daya tahan dalam sesi permainan panjang. Dengan pencahayaan LED biru pada scroll wheel dan logo, GX-300 tidak hanya berfungsi dengan baik, tetapi juga terlihat memukau di meja Anda.\n\nTombol tambahan di sisi samping memberikan akses cepat untuk fungsi shortcut atau kontrol dalam game, sehingga meningkatkan respons dan efisiensi. Dibuat dengan material matte berkualitas tinggi, mouse ini memberikan genggaman yang nyaman sekaligus tahan lama.", String.valueOf(129)},
+            {"Auraluxe", "Zenith 500", "335000", String.valueOf(R.drawable.headsetgood), "Auraluxe Zenith 500 adalah headphone premium yang dirancang untuk pecinta musik sejati yang menginginkan pengalaman audio imersif dan desain modern. Dengan kombinasi warna ungu metalik dan hitam matte, headphone ini tidak hanya memberikan performa luar biasa, tetapi juga menghadirkan estetika yang memukau. Cocok untuk digunakan dalam berbagai kondisi, baik saat santai di rumah, bepergian, maupun bekerja.\n\nEar cup besar dengan bantalan kulit sintetis berkualitas tinggi memastikan kenyamanan bahkan setelah berjam-jam pemakaian. Headband fleksibel memberikan penyesuaian optimal untuk berbagai ukuran kepala tanpa mengorbankan daya tahan.\n\nTombol kontrol pada ear cup kanan memudahkan pengguna untuk mengatur volume, memutar/menghentikan musik, atau menerima panggilan tanpa perlu mengakses perangkat utama. Ditambah dengan mikrofon bawaan, Zenith 500 juga ideal untuk panggilan telepon atau konferensi virtual.", String.valueOf(25)}
+    };
+    private String[][] productlistwithid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +61,13 @@ public class MainActivity extends AppCompatActivity{
 
         BystroDatabase bystrodb = new BystroDatabase(this);
 
-        String[][] productlist = {
-                {"Glidex Phantom","GX-300","249000",String.valueOf(R.drawable.mouse1),"Glidex Phantom GX-300 adalah mouse gaming ergonomis dengan desain futuristik yang memadukan kenyamanan dan performa tinggi. Mouse ini dirancang khusus untuk gamer yang membutuhkan akurasi, kecepatan, dan daya tahan dalam sesi permainan panjang. Dengan pencahayaan LED biru pada scroll wheel dan logo, GX-300 tidak hanya berfungsi dengan baik, tetapi juga terlihat memukau di meja Anda.\n\nTombol tambahan di sisi samping memberikan akses cepat untuk fungsi shortcut atau kontrol dalam game, sehingga meningkatkan respons dan efisiensi. Dibuat dengan material matte berkualitas tinggi, mouse ini memberikan genggaman yang nyaman sekaligus tahan lama.",String.valueOf(129)},
-                {"Auraluxe","Zenith 500","335000",String.valueOf(R.drawable.headsetgood),"Auraluxe Zenith 500 adalah headphone premium yang dirancang untuk pecinta musik sejati yang menginginkan pengalaman audio imersif dan desain modern. Dengan kombinasi warna ungu metalik dan hitam matte, headphone ini tidak hanya memberikan performa luar biasa, tetapi juga menghadirkan estetika yang memukau. Cocok untuk digunakan dalam berbagai kondisi, baik saat santai di rumah, bepergian, maupun bekerja.\n\nEar cup besar dengan bantalan kulit sintetis berkualitas tinggi memastikan kenyamanan bahkan setelah berjam-jam pemakaian. Headband fleksibel memberikan penyesuaian optimal untuk berbagai ukuran kepala tanpa mengorbankan daya tahan.\n\nTombol kontrol pada ear cup kanan memudahkan pengguna untuk mengatur volume, memutar/menghentikan musik, atau menerima panggilan tanpa perlu mengakses perangkat utama. Ditambah dengan mikrofon bawaan, Zenith 500 juga ideal untuk panggilan telepon atau konferensi virtual.",String.valueOf(25)}
-        };
+        ImageButton aboutcreator = findViewById(R.id.aboutcreator);
+        aboutcreator.setOnClickListener(view -> {
+            Intent Github = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.github.com/Malsoryz"));
+            startActivity(Github);
+        });
 
-        String[][] productlistwithid = new String[productlist.length][productlist[0].length + 1];
+        productlistwithid = new String[productlist.length][productlist[0].length + 1];
         for (int i = 0; i < productlist.length; i++) {
             productlistwithid[i][0] = String.valueOf(i + 1);
             System.arraycopy(productlist[i], 0, productlistwithid[i], 1, productlist[i].length);
@@ -88,6 +97,9 @@ public class MainActivity extends AppCompatActivity{
             }
             return false;
         });
+    }
+    public String[][] getProductlistwithid() {
+        return productlistwithid;
     }
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

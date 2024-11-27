@@ -1,16 +1,20 @@
 package com.eternity.bystro;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.material.card.MaterialCardView;
 
 import org.w3c.dom.Text;
 
@@ -33,6 +37,7 @@ public class OrdersFragment extends Fragment {
             do {
                 try {
                     View orderitem = inflater.inflate(R.layout.orderitem,listorder,false);
+                    LinearLayout seeorders = orderitem.findViewById(R.id.seeorders);
                     ImageView photoframe = orderitem.findViewById(R.id.photoframe);
                     TextView productname = orderitem.findViewById(R.id.productname);
                     TextView type = orderitem.findViewById(R.id.type);
@@ -56,16 +61,46 @@ public class OrdersFragment extends Fragment {
 
                     //from orders
                     int getorderid = cursor.getInt(cursor.getColumnIndexOrThrow("orderid"));
+                    int gettotalprice = cursor.getInt(cursor.getColumnIndexOrThrow("totalprice"));
                     int getquantity = cursor.getInt(cursor.getColumnIndexOrThrow("quantity"));
+                    int getdelivery = cursor.getInt(cursor.getColumnIndexOrThrow("delivery"));
                     String getpayment = cursor.getString(cursor.getColumnIndexOrThrow("payment"));
                     String getstatus = cursor.getString(cursor.getColumnIndexOrThrow("status"));
 
                     photoframe.setImageResource(getimage);
                     productname.setText(getname);
                     type.setText(gettype);
-                    price.setText(getprice);
+                    price.setText(MainActivity.formatIntToRP(gettotalprice));
                     quantity.setText(String.valueOf(getquantity));
                     status.setText(getstatus);
+
+                    seeorders.setOnClickListener(see_orders -> {
+                        Intent intent = new Intent(requireContext(), SeeOrders.class);
+
+                        //product list
+                        intent.putExtra("productid",getproductid);
+                        intent.putExtra("name",getname);
+                        intent.putExtra("type",gettype);
+                        intent.putExtra("price",getprice);
+                        intent.putExtra("image",getimage);
+                        intent.putExtra("desc",getdesc);
+                        intent.putExtra("stock",getstock);
+
+                        //address
+                        intent.putExtra("addressid",getaddressid);
+                        intent.putExtra("username",getusername);
+                        intent.putExtra("useraddress",getuseraddress);
+
+                        //orders
+                        intent.putExtra("orderid",getorderid);
+                        intent.putExtra("totalprice",gettotalprice);
+                        intent.putExtra("quantity",getquantity);
+                        intent.putExtra("delivery",getdelivery);
+                        intent.putExtra("payment",getpayment);
+                        intent.putExtra("status",getstatus);
+
+                        startActivity(intent);
+                    });
 
                     listorder.addView(orderitem);
                 } catch (Exception e) {

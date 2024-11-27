@@ -49,148 +49,92 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="32dp"/>
+            android:layout_height="1dp"
+            android:layout_marginVertical="8dp"
+            android:background="?attr/navbar_textcolor"
+            android:alpha="0.5"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <TextView
+                android:id="@+id/editaddress"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Edit Address"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"
+                android:drawablePadding="16dp"
+                android:gravity="center|start"
+                app:drawableStartCompat="@drawable/edit_icon"
+                app:drawableTint="?attr/Accent1"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="8dp"
+            android:background="?attr/navbar_textcolor"
+            android:alpha="0.5"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="8dp">
 
-            <com.google.android.material.card.MaterialCardView
+            <TextView
+                android:id="@+id/resetdatabase"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorSecondary"
-                android:layout_marginBottom="4dp"
-                app:cardCornerRadius="8dp">
-
-                <LinearLayout
-                    android:id="@+id/resetdatabase"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/refresh_icon"
-                        android:alpha="0.8"/>
-                    <View
-                        android:layout_width="16dp"
-                        android:layout_height="0dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Reset Database"
-                        android:textSize="16dp"
-                        android:alpha="0.8"/>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Reset Database"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"
+                android:drawablePadding="16dp"
+                android:gravity="center|start"
+                app:drawableStartCompat="@drawable/refresh_icon"
+                app:drawableTint="?attr/Accent1"/>
+            <TextView
+                android:id="@+id/resetproductlist"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorSecondary"
-                android:layout_marginBottom="4dp"
-                app:cardCornerRadius="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/refresh_icon"
-                        android:alpha="0.8"/>
-                    <View
-                        android:layout_width="16dp"
-                        android:layout_height="0dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Reset product_list table"
-                        android:textSize="16dp"
-                        android:alpha="0.8"/>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Reset Product list"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"
+                android:drawablePadding="16dp"
+                android:gravity="center|start"
+                app:drawableStartCompat="@drawable/refresh_icon"
+                app:drawableTint="?attr/Accent1"/>
+            <TextView
+                android:id="@+id/resetaddress"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorSecondary"
-                android:layout_marginBottom="4dp"
-                app:cardCornerRadius="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/refresh_icon"
-                        android:alpha="0.8"/>
-                    <View
-                        android:layout_width="16dp"
-                        android:layout_height="0dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Reset address table"
-                        android:textSize="16dp"
-                        android:alpha="0.8"/>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Reset Address"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"
+                android:drawablePadding="16dp"
+                android:gravity="center|start"
+                app:drawableStartCompat="@drawable/refresh_icon"
+                app:drawableTint="?attr/Accent1"/>
+            <TextView
+                android:id="@+id/resetorders"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorSecondary"
-                android:layout_marginBottom="4dp"
-                app:cardCornerRadius="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/refresh_icon"
-                        android:alpha="0.8"/>
-                    <View
-                        android:layout_width="16dp"
-                        android:layout_height="0dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Reset orders table"
-                        android:textSize="16dp"
-                        android:alpha="0.8"/>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Reset Orders"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"
+                android:drawablePadding="16dp"
+                android:gravity="center|start"
+                app:drawableStartCompat="@drawable/refresh_icon"
+                app:drawableTint="?attr/Accent1"/>
 
         </LinearLayout>
 

@@ -33,12 +33,10 @@
             android:textColor="?attr/Accent1"
             android:textSize="24sp"
             android:textStyle="bold"/>
-
         <View
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_weight="1"/>
-
         <ImageButton
             android:id="@+id/aboutcreator"
             android:layout_width="wrap_content"
