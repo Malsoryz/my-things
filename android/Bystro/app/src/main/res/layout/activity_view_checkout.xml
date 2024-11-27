@@ -37,6 +37,18 @@
             android:textColor="?attr/navbar_textcolor"
             android:textSize="24sp" />
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:src="@drawable/refresh_icon"
+            android:background="#00000000"/>
+
     </LinearLayout>
 
     <ScrollView
@@ -184,6 +196,7 @@
                 android:layout_marginBottom="8dp"
                 app:cardCornerRadius="4dp">
                 <LinearLayout
+                    android:id="@+id/paymentvia"
                     android:padding="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -202,10 +215,11 @@
                         android:layout_weight="1"/>
 
                     <TextView
+                        android:id="@+id/selectedpayment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="COD"
-                        android:textColor="?attr/navbar_textcolor"
+                        android:textColor="?attr/Accent2"
                         android:textSize="14dp"
                         android:alpha="0.7"/>
 

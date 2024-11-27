@@ -1,6 +1,9 @@
 package com.eternity.bystro;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -10,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -50,9 +54,49 @@ public class ViewCheckout extends AppCompatActivity {
         TextView perprice = findViewById(R.id.price);
 
         //address
+        BystroDatabase bystrodb = new BystroDatabase(this);
+        Cursor cursor = bystrodb.getTableValues("address");
+
         TextView addressusername = findViewById(R.id.addressusername);
         TextView addresses = findViewById(R.id.addresses);
-        boolean selected = false;
+        if (cursor != null && cursor.moveToFirst()) {
+            String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+            String useraddress = cursor.getString(cursor.getColumnIndexOrThrow("useraddress"));
+
+            addressusername.setText(username);
+            addresses.setText(useraddress);
+        } else {
+            addressusername.setText("None");
+            addresses.setText("Select Address");
+        }
+        LinearLayout address = findViewById(R.id.setaddress);
+        address.setOnClickListener(gotoaddress -> {
+            Intent intent = new Intent(this,ViewSetAddress.class);
+            startActivity(intent);
+        });
+
+        //payment via
+        LinearLayout paymentvia = findViewById(R.id.paymentvia);
+        TextView selectedpayment = findViewById(R.id.selectedpayment);
+        paymentvia.setOnClickListener(paymentvia1 -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View paymentlayout = getLayoutInflater().inflate(R.layout.payment_alert_dialog,null);
+            builder.setView(paymentlayout);
+            AlertDialog dialog = builder.create();
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            LinearLayout codbtn = paymentlayout.findViewById(R.id.codpayment);
+            codbtn.setOnClickListener(codpayment -> {
+                selectedpayment.setText("COD");
+                dialog.dismiss();
+            });
+            LinearLayout epay = paymentlayout.findViewById(R.id.electronicpayment);
+            epay.setOnClickListener(epayment -> {
+                selectedpayment.setText("E-Pay");
+                dialog.dismiss();
+            });
+            dialog.show();
+        });
 
         //calculate payment
         TextView subtotalprice = findViewById(R.id.subtotalprice);
@@ -63,10 +107,11 @@ public class ViewCheckout extends AppCompatActivity {
         photoframe.setImageResource(intentimage);
         productname.setText(intentproductname);
         type.setText(intenttype);
-        quantity.setText(String.valueOf(intentquantity));
+        quantity.setText("Items "+String.valueOf(intentquantity));
         perprice.setText(MainActivity.formatIntToRP(intentprice));
 
-        int delivery = 31000;
+        int randomizedelivery = 15 + (int)(Math.random() * (31 - 15 + 1));
+        int delivery = randomizedelivery * 1000;
         int subtotal = intentprice * intentquantity;
         int preprice = subtotal + delivery;
         subtotalprice.setText(MainActivity.formatIntToRP(subtotal));
@@ -78,59 +123,10 @@ public class ViewCheckout extends AppCompatActivity {
         back.setOnClickListener(view -> {
             finish();
         });
-        LinearLayout address = findViewById(R.id.setaddress);
-        address.setOnClickListener(view -> {
-            Intent intent = new Intent(this,ViewSetAddress.class);
-            startActivity(intent);
+        ImageButton refresh = findViewById(R.id.refresh);
+        refresh.setOnClickListener(view -> {
+            Toast.makeText(this,"Page refreshed",Toast.LENGTH_SHORT).show();
+            recreate();
         });
-//        Intent getintent = getIntent();
-//        int totalprices = getintent.getIntExtra("totalprices",0);
-//        int totalitems = getintent.getIntExtra("totalitems",0);
-//        int deliverypay = 31000;
-//        int totalpay = totalprices + deliverypay;
-//        ArrayList<HashMap<String, String>> selectedItemsData = (ArrayList<HashMap<String, String>>) getintent.getSerializableExtra("selecteditem");
-//        if (selectedItemsData != null) {
-//            for (HashMap<String, String> data : selectedItemsData) {
-//                int image = Integer.parseInt(Objects.requireNonNull(data.get("image")));
-//                String name = data.get("name");
-//                int productid = Integer.parseInt(Objects.requireNonNull(data.get("productid")));
-//                String types = data.get("types");
-//                String prices = data.get("prices");
-//                int preprice = Integer.parseInt(prices);
-//                int quantity = Integer.parseInt(Objects.requireNonNull(data.get("quantity")));
-//
-//                LinearLayout selecteditem = findViewById(R.id.selecteditem);
-//                View selected = getLayoutInflater().inflate(R.layout.selecteditem,selecteditem,false);
-//
-//                ImageView photoframe = selected.findViewById(R.id.photoframe);
-//                TextView productname = selected.findViewById(R.id.productname);
-//                TextView type = selected.findViewById(R.id.type);
-//                TextView quanty = selected.findViewById(R.id.quantity);
-//                TextView price = selected.findViewById(R.id.price);
-//
-//                TextView subtotalprices = findViewById(R.id.subtotalprice);
-//                TextView totalitem = findViewById(R.id.totalitems);
-//                TextView delivery = findViewById(R.id.subtotaldelivery);
-//                TextView totalpayment = findViewById(R.id.totalpayment);
-//
-//                MaterialButton makeorder = findViewById(R.id.makeorder);
-//                makeorder.setOnClickListener(view -> {
-//                    Toast.makeText(this,"ordered!",Toast.LENGTH_SHORT).show();
-//                });
-//
-//                photoframe.setImageResource(image);
-//                productname.setText(name);
-//                type.setText(types);
-//                quanty.setText("Items : "+String.valueOf(quantity));
-//                price.setText("Per Item : "+MainActivity.formatIntToRP(preprice));
-//
-//                subtotalprices.setText(MainActivity.formatIntToRP(totalprices));
-//                totalitem.setText(String.valueOf(totalitems));
-//                delivery.setText(MainActivity.formatIntToRP(deliverypay));
-//                totalpayment.setText(MainActivity.formatIntToRP(totalpay));
-//
-//                selecteditem.addView(selected);
-//            }
-//        }
     }
 }

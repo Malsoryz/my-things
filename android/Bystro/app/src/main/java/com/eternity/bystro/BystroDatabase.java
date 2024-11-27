@@ -85,6 +85,38 @@ public class BystroDatabase extends SQLiteOpenHelper {
         values.put("useraddress",address);
         db.insert("address", null, values);
     }
+    public void updateAddress(String addressusername, String addreses, int addressid) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username",addressusername);
+        values.put("useraddress",addreses);
+        db.update("address",values,"addressid = ?",new String[]{String.valueOf(addressid)});
+    }
+    public void deleteAddress(int addressid) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("address","addressid = ?",new String[]{String.valueOf(addressid)});
+    }
+    public void selectAddress(int addressid) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            ContentValues temp = new ContentValues();
+            temp.put("addressid", -1);
+            db.update("address", temp, "addressid = ?", new String[]{String.valueOf(1)});
+
+            ContentValues toTop = new ContentValues();
+            toTop.put("addressid", 1);
+            db.update("address", toTop, "addressid = ?", new String[]{String.valueOf(addressid)});
+
+            ContentValues toOriginal = new ContentValues();
+            toOriginal.put("addressid", addressid);
+            db.update("address", toOriginal, "addressid = ?", new String[]{"-1"});
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
     public Cursor getTableValues(String tableName) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + tableName;
