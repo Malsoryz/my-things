@@ -7,12 +7,14 @@ import static com.eternity.bystro.BystroDatabase.CREATE_PRODUCT_LIST_TABLE;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +44,13 @@ public class MainActivity extends AppCompatActivity{
             return insets;
         });
 
+        ImageView bystrohome = findViewById(R.id.bystrohome);
+        if (isDarkMode()) {
+            bystrohome.setImageResource(R.drawable.bystro_home_dark);
+        } else {
+            bystrohome.setImageResource(R.drawable.bystro_home);
+        }
+
         BystroDatabase bystrodb = new BystroDatabase(this);
 
         String[][] productlist = {
@@ -55,9 +64,6 @@ public class MainActivity extends AppCompatActivity{
             System.arraycopy(productlist[i], 0, productlistwithid[i], 1, productlist[i].length);
         }
 
-        bystrodb.recreateTable("product_list",CREATE_PRODUCT_LIST_TABLE);
-        bystrodb.recreateTable("address",CREATE_ADDRESS_TABLE);
-        bystrodb.recreateTable("orders",CREATE_ORDER_TABLE);
         bystrodb.addProduct(productlistwithid);
 
         if (savedInstanceState == null) {
@@ -73,6 +79,7 @@ public class MainActivity extends AppCompatActivity{
             } else if (item.getItemId() == R.id.order) {
                 selectedFragment = new OrdersFragment();
             } else if (item.getItemId() == R.id.profile) {
+                selectedFragment = new ProfileFragment();
             }
 
             if (selectedFragment != null) {
@@ -82,15 +89,17 @@ public class MainActivity extends AppCompatActivity{
             return false;
         });
     }
-
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content, fragment);
         transaction.commit();
     }
-
     public static String formatIntToRP(int number) {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("id","ID"));
         return formatter.format(number).replace(",00","");
+    }
+    private boolean isDarkMode() {
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }
 }

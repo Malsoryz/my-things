@@ -19,9 +19,6 @@
             android:name=".ViewCheckout"
             android:exported="false" />
         <activity
-            android:name=".ViewCart"
-            android:exported="false" />
-        <activity
             android:name=".ViewProduct"
             android:exported="false" />
         <activity

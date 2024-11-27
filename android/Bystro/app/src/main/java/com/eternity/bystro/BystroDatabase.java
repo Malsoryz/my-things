@@ -19,18 +19,21 @@ public class BystroDatabase extends SQLiteOpenHelper {
                     "image INTEGER, "+
                     "description TEXT, "+
                     "stock INTEGER);";
-    public static final String CREATE_ORDER_TABLE =
-            "CREATE TABLE orders ("+
-                    "orderid INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                    "productid INTEGER, "+
-                    "quantity INTEGER, "+
-                    "status VARCHAR(50), "+
-                    "FOREIGN KEY (productid) REFERENCES product_list(productid));";
     public static final String CREATE_ADDRESS_TABLE =
             "CREATE TABLE address ("+
                     "addressid INTEGER PRIMARY KEY AUTOINCREMENT, "+
                     "username VARCHAR(50), "+
                     "useraddress TEXT);";
+    public static final String CREATE_ORDER_TABLE =
+            "CREATE TABLE orders ("+
+                    "orderid INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    "productid INTEGER, "+
+                    "quantity INTEGER, "+
+                    "addressid INTEGER,"+
+                    "payment VARCHAR(10), "+
+                    "status VARCHAR(50), "+
+                    "FOREIGN KEY (productid) REFERENCES product_list(productid),"+
+                    "FOREIGN KEY (addressid) REFERENCES address(addressid));";
 
     public BystroDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,15 +42,15 @@ public class BystroDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_PRODUCT_LIST_TABLE);
-        db.execSQL(CREATE_ORDER_TABLE);
         db.execSQL(CREATE_ADDRESS_TABLE);
+        db.execSQL(CREATE_ORDER_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS product_list");
-        db.execSQL("DROP TABLE IF EXISTS orders");
         db.execSQL("DROP TABLE IF EXISTS address");
+        db.execSQL("DROP TABLE IF EXISTS orders");
         onCreate(db);
     }
     public void addProduct(String[][] productlist) {
@@ -116,6 +119,28 @@ public class BystroDatabase extends SQLiteOpenHelper {
         } finally {
             db.endTransaction();
         }
+    }
+    public void makeOrder(int productid, int addressid, int quantity, String payment, int prestock) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("productid",productid);
+        values.put("addressid",addressid);
+        values.put("quantity",quantity);
+        values.put("payment",payment);
+        values.put("status","Processing Order...");
+        ContentValues updatestock = new ContentValues();
+        int stock = prestock - quantity;
+        updatestock.put("stock",stock);
+        db.insert("orders",null,values);
+        db.update("product_list",updatestock,"productid = ?",new String[]{String.valueOf(productid)});
+    }
+    public Cursor getAllTable() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT product_list.*, address.*, orders.orderid, orders.quantity, orders.payment, orders.status "+
+                "FROM product_list, address, orders "+
+                "WHERE product_list.productid = orders.productid "+
+                "AND address.addressid = orders.addressid;";
+        return db.rawQuery(query,null);
     }
     public Cursor getTableValues(String tableName) {
         SQLiteDatabase db = this.getReadableDatabase();

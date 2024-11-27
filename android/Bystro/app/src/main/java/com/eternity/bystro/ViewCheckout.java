@@ -40,11 +40,13 @@ public class ViewCheckout extends AppCompatActivity {
             return insets;
         });
         Intent getintent = getIntent();
+        int productid = getintent.getIntExtra("productid",0);
         int intentimage = getintent.getIntExtra("image",0);
         String intentproductname = getintent.getStringExtra("productname");
         String intenttype = getintent.getStringExtra("type");
         int intentquantity = getintent.getIntExtra("quantity",0);
         int intentprice = getintent.getIntExtra("price",0);
+        int stock = getintent.getIntExtra("stock",0);
 
         //items
         ImageView photoframe = findViewById(R.id.photoframe);
@@ -110,8 +112,7 @@ public class ViewCheckout extends AppCompatActivity {
         quantity.setText("Items "+String.valueOf(intentquantity));
         perprice.setText(MainActivity.formatIntToRP(intentprice));
 
-        int randomizedelivery = 15 + (int)(Math.random() * (31 - 15 + 1));
-        int delivery = randomizedelivery * 1000;
+        int delivery = getintent.getIntExtra("delivery",0);
         int subtotal = intentprice * intentquantity;
         int preprice = subtotal + delivery;
         subtotalprice.setText(MainActivity.formatIntToRP(subtotal));
@@ -127,6 +128,24 @@ public class ViewCheckout extends AppCompatActivity {
         refresh.setOnClickListener(view -> {
             Toast.makeText(this,"Page refreshed",Toast.LENGTH_SHORT).show();
             recreate();
+        });
+        MaterialButton makeorder = findViewById(R.id.makeorder);
+        makeorder.setOnClickListener(makeorder1 -> {
+            if (cursor != null && cursor.moveToFirst()) {
+                int getaddressid = cursor.getInt(cursor.getColumnIndexOrThrow("addressid"));
+                String getpayment = selectedpayment.getText().toString();
+
+                try {
+                    bystrodb.makeOrder(productid,getaddressid,intentquantity,getpayment,stock);
+                    Toast.makeText(this, "Product ordered!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this,MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            cursor.close();
         });
     }
 }

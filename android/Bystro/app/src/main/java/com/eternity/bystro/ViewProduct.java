@@ -67,6 +67,8 @@ public class ViewProduct extends AppCompatActivity {
 
         String getquantity = howmuch.getText().toString();
         int quanty = Integer.parseInt(getquantity);
+        int randomizedelivery = 15 + (int)(Math.random() * (31 - 15 + 1));
+        int delivery = randomizedelivery * 1000;
 
         ImageButton back = findViewById(R.id.back);
         back.setOnClickListener(view -> {
@@ -112,11 +114,14 @@ public class ViewProduct extends AppCompatActivity {
             int quantity = Integer.parseInt(howmuch.getText().toString());
             if (quantity > 0) {
                 Intent intent = new Intent(this,ViewCheckout.class);
+                intent.putExtra("productid",productid);
                 intent.putExtra("image",image);
                 intent.putExtra("productname",productname);
                 intent.putExtra("type",type);
                 intent.putExtra("quantity",Integer.parseInt(howmuch.getText().toString()));
                 intent.putExtra("price",price);
+                intent.putExtra("stock",stock);
+                intent.putExtra("delivery",delivery);
                 startActivity(intent);
             } else {
                 Toast.makeText(this,"Add items first!",Toast.LENGTH_SHORT).show();
