@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -58,6 +59,11 @@ public class SeeOrders extends AppCompatActivity {
         String getpayment = getintent.getStringExtra("payment");
         String getstatus = getintent.getStringExtra("status");
 
+        ImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(view -> {
+            finish();
+        });
+
         ImageView photoframe = findViewById(R.id.photoframe);
         TextView productname = findViewById(R.id.productname);
         TextView type = findViewById(R.id.type);
@@ -93,16 +99,17 @@ public class SeeOrders extends AppCompatActivity {
 
         MaterialButton cancelorders = findViewById(R.id.cancelorders);
         cancelorders.setOnClickListener(cancel -> {
-            AlertDialogDelete(getorderid);
+            AlertDialogDelete(getorderid,getproductid,getstock,getquantity);
+            Toast.makeText(this, "Order Cancelled", Toast.LENGTH_SHORT).show();
         });
     }
-    private MaterialAlertDialogBuilder AlertDialogDelete(int orderid) {
+    private MaterialAlertDialogBuilder AlertDialogDelete(int orderid, int productid, int stock, int quantity) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle("Confirmation");
         builder.setMessage("Do you want to delete it?");
         builder.setPositiveButton("Delete", (dialog, which) -> {
             BystroDatabase bystrodb = new BystroDatabase(this);
-            bystrodb.cancelorders(orderid);
+            bystrodb.cancelorders(orderid,productid,stock,quantity);
             Intent intent = new Intent(this,MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

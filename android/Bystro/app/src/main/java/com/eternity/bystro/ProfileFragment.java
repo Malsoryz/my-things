@@ -26,6 +26,7 @@ public class ProfileFragment extends Fragment {
         TextView resetproductlist = rootview.findViewById(R.id.resetproductlist);
         TextView resetaddress = rootview.findViewById(R.id.resetaddress);
         TextView resetorders = rootview.findViewById(R.id.resetorders);
+        TextView refresh = rootview.findViewById(R.id.refresh);
 
         editaddress.setOnClickListener(edit_address -> {
             Intent intent = new Intent(requireContext(), ViewSetAddress.class);
@@ -52,6 +53,9 @@ public class ProfileFragment extends Fragment {
         resetorders.setOnClickListener(reset_orders -> {
             bystrodb.recreateTable("orders",BystroDatabase.CREATE_ORDER_TABLE);
             Toast.makeText(mainActivity, "Successfully reset orders", Toast.LENGTH_SHORT).show();
+        });
+        refresh.setOnClickListener(refresh1 -> {
+            requireActivity().recreate();
         });
 
         return rootview;

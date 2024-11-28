@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 public class BystroDatabase extends SQLiteOpenHelper {
 
@@ -146,8 +147,12 @@ public class BystroDatabase extends SQLiteOpenHelper {
                 "AND address.addressid = orders.addressid;";
         return db.rawQuery(query,null);
     }
-    public void cancelorders(int orderid) {
+    public void cancelorders(int orderid, int productid, int stock, int quantity) {
         SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues updatestock = new ContentValues();
+        int prestock = stock + quantity;
+        updatestock.put("stock",prestock);
+        db.update("product_list",updatestock,"productid = ?",new String[]{String.valueOf(productid)});
         db.delete("orders","orderid = ?",new String[]{String.valueOf(orderid)});
     }
     public Cursor getTableValues(String tableName) {
