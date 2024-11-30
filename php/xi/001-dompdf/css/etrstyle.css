@@ -1,0 +1,15 @@
+.custom-bg-1{
+    background-image: linear-gradient(to right, #4F75FF, #00CCDD);
+}
+.custom-bg-2{
+    background-image: linear-gradient(to right, #800000, #98541c);
+}
+.custom-bg-3{
+    background-image: linear-gradient(to right, #EB8317, #F3C623);
+}
+.custom-text-col-1{
+    background-image: linear-gradient(to right, #00CCDD, #ffbb00);
+    color: transparent;
+    background-clip: text;
+    font-weight: bold;
+}
