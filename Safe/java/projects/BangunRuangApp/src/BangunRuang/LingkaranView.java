@@ -8,32 +8,32 @@ package BangunRuang;
  *
  * @author malsoryz
  */
-public class PersegiView extends javax.swing.JInternalFrame {
+public class LingkaranView extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form PersegiView
+     * Creates new form LingkaranView
      */
-    private double sisi;
+    private double jari;
     
-    public PersegiView() {
+    public LingkaranView() {
         initComponents();
     }
     
     private void refresh() {
-        fieldSisi.setText("");
+        fieldJari.setText("");
         fieldHasilLuas.setText("");
         fieldHasilKeliling.setText("");
-        fieldSisi.requestFocus();
+        fieldJari.requestFocus();
     }
     
     private void hitung() {
-        sisi = Double.parseDouble(fieldSisi.getText());
-        Persegi p = new Persegi();
-        p.setLuas(sisi);
-        p.setKeliling(sisi);
+        jari = Double.parseDouble(fieldJari.getText());
+        Lingkaran l = new Lingkaran();
+        l.setLuas(jari);
+        l.setKeliling(jari);
         
-        fieldHasilLuas.setText(String.valueOf(p.getLuas()));
-        fieldHasilKeliling.setText(String.valueOf(p.getKeliling()));
+        fieldHasilLuas.setText(String.valueOf(l.getLuas()));
+        fieldHasilKeliling.setText(String.valueOf(l.getKeliling()));
     }
 
     /**
@@ -45,24 +45,20 @@ public class PersegiView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        fieldSisi = new javax.swing.JTextField();
+        fieldJari = new javax.swing.JTextField();
         HitungButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         fieldHasilKeliling = new javax.swing.JTextField();
         fieldHasilLuas = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
-        setTitle("Bangun Ruang 2D - Persegi");
+        setTitle("Bangun Ruang 2D - Lingkaran");
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PERSEGI");
-
-        jLabel2.setText("Nilai Sisi :");
+        jLabel2.setText("Nilai Jari - Jari :");
 
         HitungButton.setText("Hitung");
         HitungButton.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +82,10 @@ public class PersegiView extends javax.swing.JInternalFrame {
 
         fieldHasilLuas.setEditable(false);
 
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("LINGKARAN");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,30 +93,26 @@ public class PersegiView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(fieldHasilKeliling, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addComponent(jLabel3)
-                            .addGap(290, 290, 290)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fieldHasilLuas, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(fieldHasilKeliling)))
+                    .addComponent(jLabel4)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(HitungButton)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(resetButton))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(fieldHasilLuas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fieldSisi, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(16, 16, 16))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(fieldJari, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -126,7 +122,7 @@ public class PersegiView extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fieldSisi, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldJari, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -137,10 +133,10 @@ public class PersegiView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(fieldHasilLuas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(fieldHasilKeliling, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGap(0, 29, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,11 +150,12 @@ public class PersegiView extends javax.swing.JInternalFrame {
         refresh();
     }//GEN-LAST:event_resetButtonActionPerformed
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton HitungButton;
     private javax.swing.JTextField fieldHasilKeliling;
     private javax.swing.JTextField fieldHasilLuas;
-    private javax.swing.JTextField fieldSisi;
+    private javax.swing.JTextField fieldJari;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

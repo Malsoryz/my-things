@@ -8,22 +8,22 @@ package BangunRuang;
  *
  * @author malsoryz
  */
-public class Persegi {
+public class Lingkaran {
     private double luas, keliling;
     
     public double getLuas() {
         return luas;
     }
     
-    public void setLuas(double sisi) {
-        this.luas = sisi * sisi;
+    public void setLuas(double jari) {
+        this.luas = Math.round((Math.PI * Math.pow(jari, 2)) * 100.0) / 100.0;
     }
     
     public double getKeliling() {
         return keliling;
     }
     
-    public void setKeliling(double sisi) {
-        this.keliling = 4 * sisi;
+    public void setKeliling(double jari) {
+        this.keliling = Math.round((2 * Math.PI * jari) * 100.0) / 100.0;
     }
 }

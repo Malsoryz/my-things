@@ -8,22 +8,22 @@ package BangunRuang;
  *
  * @author malsoryz
  */
-public class Persegi {
-    private double luas, keliling;
+public class Kubus {
+    private double luas, volume;
     
     public double getLuas() {
         return luas;
     }
     
     public void setLuas(double sisi) {
-        this.luas = sisi * sisi;
+        this.luas = 6 * (sisi * sisi);
     }
     
-    public double getKeliling() {
-        return keliling;
+    public double getVolume() {
+        return volume;
     }
     
-    public void setKeliling(double sisi) {
-        this.keliling = 4 * sisi;
+    public void setVolume(double sisi) {
+        this.volume = sisi * sisi * sisi;
     }
 }

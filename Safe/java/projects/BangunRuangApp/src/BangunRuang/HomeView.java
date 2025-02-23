@@ -16,6 +16,52 @@ public class HomeView extends javax.swing.JFrame {
     public HomeView() {
         initComponents();
     }
+    
+    private void setMaximumFrame() {
+        this.setExtendedState(MAXIMIZED_BOTH);
+    }
+
+    private void menuDuaDimensiPersegi() {
+        PersegiView pv = new PersegiView();
+        homePanel.add(pv);
+        pv.setVisible(true);
+    }
+    
+    private void menuDuaDimensiPersegiPanjang() {
+        PersegiPanjangView ppv = new PersegiPanjangView();
+        homePanel.add(ppv);
+        ppv.setVisible(true);
+    }
+    
+    private void menuDuaDimensiLingkaran() {
+        LingkaranView lv = new LingkaranView();
+        homePanel.add(lv);
+        lv.setVisible(true);
+    }
+    
+    private void menuTigaDimensiKubus() {
+        KubusView kv = new KubusView();
+        homePanel.add(kv);
+        kv.setVisible(true);
+    }
+    
+    private void menuTigaDimensiBalok() {
+        BalokView bv = new BalokView();
+        homePanel.add(bv);
+        bv.setVisible(true);
+    }
+    
+    private void menuTigaDimensiTabung() {
+        TabungView tv = new TabungView();
+        homePanel.add(tv);
+        tv.setVisible(true);
+    }
+    
+    private void menuTigaDimensiBola() {
+        BolaView bv = new BolaView();
+        homePanel.add(bv);
+        bv.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,11 +100,11 @@ public class HomeView extends javax.swing.JFrame {
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 565, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 251, Short.MAX_VALUE)
+            .addGap(0, 425, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -68,14 +114,14 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(homePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(homePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
@@ -105,9 +151,19 @@ public class HomeView extends javax.swing.JFrame {
         jMenu1.add(menuBRPersegi);
 
         menuBRPersegiPanjang.setText("Persegi Panjang");
+        menuBRPersegiPanjang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBRPersegiPanjangActionPerformed(evt);
+            }
+        });
         jMenu1.add(menuBRPersegiPanjang);
 
         menuBRLingkaran.setText("Lingkaran");
+        menuBRLingkaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBRLingkaranActionPerformed(evt);
+            }
+        });
         jMenu1.add(menuBRLingkaran);
 
         jMenu6.add(jMenu1);
@@ -115,15 +171,35 @@ public class HomeView extends javax.swing.JFrame {
         jMenu2.setText("3D");
 
         menuBRKubus.setText("Kubus");
+        menuBRKubus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBRKubusActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuBRKubus);
 
         menuBRBalok.setText("Balok");
+        menuBRBalok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBRBalokActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuBRBalok);
 
         menuBRTabung.setText("Tabung");
+        menuBRTabung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBRTabungActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuBRTabung);
 
         menuBRBola.setText("Bola");
+        menuBRBola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBRBolaActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuBRBola);
 
         jMenu6.add(jMenu2);
@@ -146,6 +222,30 @@ public class HomeView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setMaximumFrame();
     }//GEN-LAST:event_formWindowOpened
+
+    private void menuBRPersegiPanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBRPersegiPanjangActionPerformed
+        menuDuaDimensiPersegiPanjang();
+    }//GEN-LAST:event_menuBRPersegiPanjangActionPerformed
+
+    private void menuBRLingkaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBRLingkaranActionPerformed
+        menuDuaDimensiLingkaran();
+    }//GEN-LAST:event_menuBRLingkaranActionPerformed
+
+    private void menuBRKubusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBRKubusActionPerformed
+        menuTigaDimensiKubus();
+    }//GEN-LAST:event_menuBRKubusActionPerformed
+
+    private void menuBRBalokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBRBalokActionPerformed
+        menuTigaDimensiBalok();
+    }//GEN-LAST:event_menuBRBalokActionPerformed
+
+    private void menuBRTabungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBRTabungActionPerformed
+        menuTigaDimensiTabung();
+    }//GEN-LAST:event_menuBRTabungActionPerformed
+
+    private void menuBRBolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBRBolaActionPerformed
+        menuTigaDimensiBola();
+    }//GEN-LAST:event_menuBRBolaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,14 +300,4 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuBRTabung;
     private javax.swing.JMenuItem menuKeluar;
     // End of variables declaration//GEN-END:variables
-
-    private void setMaximumFrame() {
-        this.setExtendedState(MAXIMIZED_BOTH);
-    }
-
-    private void menuDuaDimensiPersegi() {
-        PersegiView pv = new PersegiView();
-        homePanel.add(pv);
-        pv.setVisible(true);
-    }
 }
