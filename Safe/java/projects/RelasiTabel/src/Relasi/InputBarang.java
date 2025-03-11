@@ -30,17 +30,10 @@ public class InputBarang extends javax.swing.JFrame {
     }
     
     private void selectRowFromTable() {
-        try {
-            String clickTable = (tableDataBarang.getModel().getValueAt(tableDataBarang.getSelectedRow(), 0).toString());
-            String query = String.format("SELECT * FROM barang WHERE kode='%s'", clickTable);
-            ResultSet set = koneksi.koneksiDB().createStatement().executeQuery(query);
-            while (set.next()) {
-                fieldKodeBarang.setText(String.valueOf(set.getLong("kode")));
-                fieldNamaBarang.setText(set.getString("nama"));
-                fieldHargaBarang.setText(String.valueOf(set.getLong("harga")));
-            }
-        } catch (SQLException e) {
-        }
+        int getTableRowIndex = tableDataBarang.getSelectedRow();
+        fieldKodeBarang.setText(tableDataBarang.getValueAt(getTableRowIndex, 0).toString());
+        fieldNamaBarang.setText(tableDataBarang.getValueAt(getTableRowIndex, 1).toString());
+        fieldHargaBarang.setText(tableDataBarang.getValueAt(getTableRowIndex, 2).toString());
     }
     
     private void resetField() {
