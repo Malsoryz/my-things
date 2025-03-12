@@ -6,15 +6,9 @@ package Relasi;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
